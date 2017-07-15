@@ -51,7 +51,7 @@ public class Usuario{
 		this.matricula = matricula;
 		this.ativo = true;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

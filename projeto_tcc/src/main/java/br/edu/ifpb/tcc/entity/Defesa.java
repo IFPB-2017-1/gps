@@ -89,5 +89,5 @@ public class Defesa {
 		return "Defesa [id=" + id + ", local=" + local + ", data=" + data + ", hora=" + hora + ", banca=" + banca
 				+ ", nota=" + nota + "]";
 	}
-	
+
 }

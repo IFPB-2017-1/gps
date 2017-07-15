@@ -93,4 +93,5 @@ public class Discente implements Serializable{
 		return "Discente [id=" + id + ", usuario=" + usuario + ", curso=" + curso + ", periodo=" + periodo + ", tccs="
 				+ tccs + ", convites=" + convites + "]";
 	}
+
 }
