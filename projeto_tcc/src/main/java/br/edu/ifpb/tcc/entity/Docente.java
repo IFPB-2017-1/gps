@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,7 @@ public class Docente {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@OneToOne
 	@JoinColumn(name="ID_USUARIO")
 	private Usuario usuario;
 	
@@ -31,8 +34,12 @@ public class Docente {
 	@OneToMany(mappedBy="docente", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=false)
 	private List<Convite> convites;
 	
+	@ManyToOne
 	@JoinColumn(name="ID_AGENDA")
 	private Agenda agenda;
+	
+	@OneToMany(mappedBy="orientador", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=false)
+	private List<Tcc> tccs;
 	
 	public Docente(){}
 	public Docente(Usuario usuario, String disciplina){

@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +19,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TB_DISCENTE")
 public class Discente implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="NU_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -90,4 +93,5 @@ public class Discente implements Serializable{
 		return "Discente [id=" + id + ", usuario=" + usuario + ", curso=" + curso + ", periodo=" + periodo + ", tccs="
 				+ tccs + ", convites=" + convites + "]";
 	}
-}	
+
+}

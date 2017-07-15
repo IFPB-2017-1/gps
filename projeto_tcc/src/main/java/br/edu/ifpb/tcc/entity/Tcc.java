@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,7 @@ public class Tcc {
 	@JoinColumn(name="ID_DISCENTE")
 	private Discente discente;
 	
+	@ManyToOne
 	@JoinColumn(name="ID_DOCENTE")
 	private Docente orientador;
 	

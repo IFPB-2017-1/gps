@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,12 +25,12 @@ public class Atividade {
 	private String hora;
 	
 	@Column(name="DS_DESCRICAO")
-	private String Descrição;
+	private String descricao;
 	
 	public Atividade(){}
 	public Atividade(String descricao){
 		super();
-		this.Descrição = descricao;
+		this.descricao = descricao;
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		String dataString = format.format(date);
@@ -57,16 +57,17 @@ public class Atividade {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	public String getDescrição() {
-		return Descrição;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescrição(String descrição) {
-		Descrição = descrição;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	@Override
 	public String toString() {
-		return "Atividade [id=" + id + ", data=" + data + ", hora=" + hora + ", Descrição=" + Descrição + "]";
+		return "Atividade [id=" + id + ", data=" + data + ", hora=" + hora + ", Descricao=" + Descricao + "]";
 	}
 	
 }
+

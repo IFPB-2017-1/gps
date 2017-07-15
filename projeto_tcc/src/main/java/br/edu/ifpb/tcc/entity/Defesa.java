@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +28,7 @@ public class Defesa {
 	@Column(name="DS_HORA")
 	private String hora;
 	
+	@ManyToOne
 	@JoinColumn(name="ID_LOCAL")
 	private Banca banca;
 	
@@ -87,5 +89,5 @@ public class Defesa {
 		return "Defesa [id=" + id + ", local=" + local + ", data=" + data + ", hora=" + hora + ", banca=" + banca
 				+ ", nota=" + nota + "]";
 	}
-	
+
 }

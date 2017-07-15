@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +35,9 @@ public class Usuario{
 	
 	@Column(name="DS_MATRICULA")
 	private int matricula;
+	 
+	@Column(name="ATIVO")
+	private Boolean ativo;
 	
 	public Usuario(){}
 	public Usuario(String nome, String endereco, String fone, String email, String senha, String perfil, int matricula){
@@ -46,7 +49,9 @@ public class Usuario{
 		this.senha = senha;
 		this.perfil = perfil;
 		this.matricula = matricula;
+		this.ativo = true;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -95,9 +100,18 @@ public class Usuario{
 	public void setMatricula(int matricula) {
 		this.matricula = matricula;
 	}
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone + ", email="
-				+ email + ", senha=" + senha + ", perfil=" + perfil + ", matricula=" + matricula + "]";
+				+ email + ", senha=" + senha + ", perfil=" + perfil + ", matricula=" + matricula + ", ativo=" + ativo
+				+ "]";
 	}
+	
 }

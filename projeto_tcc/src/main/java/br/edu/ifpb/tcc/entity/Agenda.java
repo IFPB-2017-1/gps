@@ -1,4 +1,4 @@
-package br.edu.ifpb.entity;
+package br.edu.ifpb.tcc.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,4 +52,5 @@ public class Agenda {
 		return "Agenda [id=" + id + ", atividades=" + atividades + "]";
 	}
 	
+
 }
