@@ -36,7 +36,7 @@ public class Usuario{
 	@Column(name="DS_MATRICULA")
 	private int matricula;
 	 
-	@Column(name="ATIVO")
+	@Column(name="BO_ATIVO")
 	private Boolean ativo;
 	
 	public Usuario(){}
