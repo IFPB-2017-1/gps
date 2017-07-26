@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,10 +28,7 @@ public class Docente {
 	@OneToOne
 	@JoinColumn(name="ID_USUARIO")
 	private Usuario usuario;
-	
-	@Column(name="DS_DISCIPLINA")
-	private String disciplina;
-	
+		
 	@OneToMany(mappedBy="docente", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=false)
 	private List<Convite> convites;
 	
@@ -38,14 +36,36 @@ public class Docente {
 	@JoinColumn(name="ID_AGENDA")
 	private Agenda agenda;
 	
+	@OneToMany 	(mappedBy="docente", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Horario> horarios;
+	
+	public void addHorario(Horario horario){
+		horarios.add(horario);
+	}
+	
+
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+	public void setHorarios(List<Horario> horario) {
+		this.horarios = horario;
+	}
+	public List<Tcc> getTccs() {
+		return tccs;
+	}
+	public void setTccs(List<Tcc> tccs) {
+		this.tccs = tccs;
+	}
+
 	@OneToMany(mappedBy="orientador", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=false)
 	private List<Tcc> tccs;
 	
-	public Docente(){}
-	public Docente(Usuario usuario, String disciplina){
+	public Docente(){
+		horarios = new ArrayList<Horario>();
+	}
+	public Docente(Usuario usuario){
 		super();
 		this.usuario = usuario;
-		this.disciplina = disciplina;
 		this.agenda = new Agenda();
 		this.convites = new ArrayList<Convite>();
 	}
@@ -66,14 +86,6 @@ public class Docente {
 		this.usuario = usuario;
 	}
 
-	public String getDisciplina() {
-		return disciplina;
-	}
-
-	public void setDisciplina(String disciplina) {
-		this.disciplina = disciplina;
-	}
-
 	public List<Convite> getConvites() {
 		return convites;
 	}
@@ -92,7 +104,7 @@ public class Docente {
 
 	@Override
 	public String toString() {
-		return "Docente [id=" + id + ", usuario=" + usuario + ", disciplina=" + disciplina + ", convites=" + convites
+		return "Docente [id=" + id + ", usuario=" + usuario + ", " + ", convites=" + convites
 				+ ", agenda=" + agenda + "]";
 	}
 	
