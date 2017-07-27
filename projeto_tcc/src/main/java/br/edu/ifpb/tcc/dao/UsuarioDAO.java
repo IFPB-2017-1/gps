@@ -26,5 +26,15 @@ public class UsuarioDAO extends GenericDAO<Usuario, Integer> {
 		}
 		return usuario;
 	}
+	public Usuario findByName(String nome) {
+		Query q = this.getEntityManager().createQuery("select u from Usuario u where u.nome = :nome");
+		q.setParameter("nome", nome);
+		Usuario usuario = null;
+		try {
+			usuario = (Usuario) q.getSingleResult();
+		} catch (NoResultException e) {
+		}
+		return usuario;
+	}
 	
 }
