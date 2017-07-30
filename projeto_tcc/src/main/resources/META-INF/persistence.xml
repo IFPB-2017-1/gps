@@ -8,11 +8,8 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-<!-- 			<property name="hibernate.connection.username" value="ayfrlmmg" />usuario do seu PostgreSQL  -->
-<!-- 			<property name="hibernate.connection.password" value="eD_WTxRD5v_JT38sUMYvJNzdT4hpCPAf" />Senha do seu PostgreSQL  -->
-<!-- 			<property name="hibernate.connection.url" value="jdbc:postgresql://babar.elephantsql.com:5432/ayfrlmmg" /> Endereço do seu PostgreSQL  -->
-			<property name="hibernate.connection.username" value="dspace" /><!--usuario do seu PostgreSQL  -->
-			<property name="hibernate.connection.password" value="dspace" /><!--Senha do seu PostgreSQL  -->
+			<property name="hibernate.connection.username" value="postgres" /><!--usuario do seu PostgreSQL  -->
+			<property name="hibernate.connection.password" value="postgres" /><!--Senha do seu PostgreSQL  -->
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/agendamentotcc" /> <!-- Endereço do seu PostgreSQL --> 
 			<property name="hibernate.showSql" value="true" />
 			<property name="hibernate.c3p0.acquire_increment" value="1" />
