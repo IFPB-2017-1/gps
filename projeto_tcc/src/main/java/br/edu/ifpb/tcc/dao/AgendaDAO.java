@@ -1,9 +1,9 @@
-package br.edu.ifpb.dao;
+package br.edu.ifpb.tcc.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.edu.ifpb.entity.Agenda;
+import br.edu.ifpb.tcc.entity.Agenda;
 
 public class AgendaDAO extends GenericDAO{
 	private Agenda agenda;

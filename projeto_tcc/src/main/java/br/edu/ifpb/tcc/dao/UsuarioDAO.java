@@ -1,14 +1,16 @@
-package br.edu.ifpb.dao;
+package br.edu.ifpb.tcc.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.edu.ifpb.entity.Usuario;
+import br.edu.ifpb.tcc.entity.Docente;
+import br.edu.ifpb.tcc.entity.Usuario;
 
-public class UsuarioDAO extends GenericDAO{
+public class UsuarioDAO extends GenericDAO<Usuario, Integer>{
 	private Usuario usuario;
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	

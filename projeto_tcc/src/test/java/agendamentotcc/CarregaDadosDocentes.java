@@ -31,9 +31,9 @@ public class CarregaDadosDocentes {
     	em = emf.createEntityManager();
     	ManagedEMContext.bind(emf, emf.createEntityManager());
     	
-    	cadastraUsuarios();
-    	cadastraDocentes();
-    	cadastraDocentesHorarios();
+//    	cadastraUsuarios();
+//    	cadastraDocentes();
+//    	cadastraDocentesHorarios();
     	
     	System.exit(0);
 	}

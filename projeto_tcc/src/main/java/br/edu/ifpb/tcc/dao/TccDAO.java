@@ -1,4 +1,4 @@
-package br.edu.ifpb.dao;
+package br.edu.ifpb.tcc.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.edu.ifpb.entity.Discente;
-import br.edu.ifpb.entity.Docente;
-import br.edu.ifpb.entity.Tcc;
+import br.edu.ifpb.tcc.entity.Discente;
+import br.edu.ifpb.tcc.entity.Docente;
+import br.edu.ifpb.tcc.entity.Tcc;
 
 public class TccDAO extends GenericDAO{
 	private Tcc tcc;

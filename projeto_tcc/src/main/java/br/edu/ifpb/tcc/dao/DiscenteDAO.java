@@ -1,4 +1,4 @@
-package br.edu.ifpb.dao;
+package br.edu.ifpb.tcc.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.edu.ifpb.entity.Discente;
-import br.edu.ifpb.entity.Docente;
+import br.edu.ifpb.tcc.entity.Discente;
 
 public class DiscenteDAO extends GenericDAO {
 	private Discente discente;

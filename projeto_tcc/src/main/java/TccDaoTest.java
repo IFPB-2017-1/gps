@@ -27,7 +27,7 @@ public class TccDaoTest {
 	//Campos que serao mostrados na tela de edicao de cada tcc
 	@Test(expected = RuntimeException.class)
 	public static void mostrarTcc(TccDAO dao, int id) {
-		Tcc tcc = dao.find(id);
+		Tcc tcc = (Tcc) dao.find(id);
 		System.out.println("Matrícula: " + tcc.getDiscente().getUsuario().getMatricula());
 		System.out.println("Nome do Aluno: " + tcc.getDiscente().getUsuario().getNome());
 		System.out.println("Título do Tcc: " + tcc.getTitulo());
@@ -40,7 +40,7 @@ public class TccDaoTest {
 	//Edicao do TCC
 	@Test(expected = RuntimeException.class)
 	public static void editarTcc(TccDAO dao, int id) {
-		Tcc tcc = dao.find(id);
+		Tcc tcc = (Tcc) dao.find(id);
 		dao.beginTransaction();
 		tcc.setTitulo("GLOCAL ARTS - Marketplace de Artes Plásticas");
 		dao.update(tcc);
