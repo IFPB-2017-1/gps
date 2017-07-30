@@ -10,7 +10,8 @@ import br.edu.ifpb.tcc.entity.Discente;
 import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Tcc;
 
-public class TccDAO extends GenericDAO{
+
+public class TccDAO extends GenericDAO<Tcc, Integer>{
 	private Tcc tcc;
 	private List<Tcc> tccs = new ArrayList<Tcc>();
 	

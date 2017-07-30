@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import br.edu.ifpb.tcc.entity.Banca;
 import br.edu.ifpb.tcc.entity.Docente;
 
-public class BancaDAO extends GenericDAO {
+public class BancaDAO extends GenericDAO<Banca, Integer> {
 	private Banca banca;
 	private List<Banca> bancas = new ArrayList<Banca>();
 

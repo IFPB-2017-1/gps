@@ -8,7 +8,7 @@ import javax.persistence.Query;
 
 import br.edu.ifpb.tcc.entity.Discente;
 
-public class DiscenteDAO extends GenericDAO {
+public class DiscenteDAO extends GenericDAO<Discente, Integer> {
 	private Discente discente;
 	private List<Discente> discentes = new ArrayList<Discente>();
 

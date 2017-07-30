@@ -10,7 +10,7 @@ import br.edu.ifpb.tcc.entity.Convite;
 import br.edu.ifpb.tcc.entity.Discente;
 import br.edu.ifpb.tcc.entity.Docente;
 
-public class ConviteDAO extends GenericDAO {
+public class ConviteDAO extends GenericDAO<Convite, Integer> {
 	private Convite convite;
 	private List<Convite> convites = new ArrayList<Convite>();
 

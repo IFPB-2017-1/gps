@@ -5,7 +5,8 @@ import javax.persistence.Query;
 
 import br.edu.ifpb.tcc.entity.Agenda;
 
-public class AgendaDAO extends GenericDAO{
+
+public class AgendaDAO extends GenericDAO<Agenda, Integer>{
 	private Agenda agenda;
 	
 	public AgendaDAO(){
