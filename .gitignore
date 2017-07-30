@@ -1,3 +1,5 @@
+#inclusão do persistense.xml
+persistence.xml
 # Compiled class file
 *.class
 
