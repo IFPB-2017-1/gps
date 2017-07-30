@@ -14,18 +14,18 @@
 		<param name="append" value="false" />
 		<param name="maxFileSize" value="10MB" />
 		<param name="maxBackupIndex" value="10" />
-		<param name="file" value="${catalina.home}/logs/memoriam.log" />
+		<param name="file" value="${catalina.home}/logs/agendamentotcc.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
 		</layout>
 	</appender>
 
-	<!-- Nivel de verbosidade para classes nos pacotes java do Collegialis -->
+	<!-- Nivel de verbosidade para classes nos pacotes java do Collegialis 
 	<logger name="br.edu.ifpb.collegialis" additivity="false">
 		<level value="info" />
 		<appender-ref ref="file" />
 		<appender-ref ref="console" />
-	</logger>
+	</logger>-->
 	
 	<logger name="org.hibernate" additivity="false">
 		<level value="error" />
@@ -33,7 +33,7 @@
 	</logger>
 
 	<root>
-		<level value="ERROR" />
+		<level value="error" />
 		<appender-ref ref="console" />
 		<appender-ref ref="file" />
 	</root>

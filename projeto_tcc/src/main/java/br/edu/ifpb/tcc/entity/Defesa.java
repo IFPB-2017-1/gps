@@ -35,6 +35,9 @@ public class Defesa {
 	@Column(name="DS_NOTA")
 	private double nota;
 	
+	@Column(name="BO_ATIVO")
+	private boolean ativo;
+	
 	public Defesa(){}
 	public Defesa(String local, Banca banca){
 		super();
@@ -47,6 +50,7 @@ public class Defesa {
 		array = dataString.split(" ");
 		this.data = array[0];
 		this.hora = array[1];
+		this.ativo = true;
 	}
 	public Integer getId() {
 		return id;
@@ -84,10 +88,16 @@ public class Defesa {
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 	@Override
 	public String toString() {
 		return "Defesa [id=" + id + ", local=" + local + ", data=" + data + ", hora=" + hora + ", banca=" + banca
-				+ ", nota=" + nota + "]";
+				+ ", nota=" + nota + ", ativo=" + ativo + "]";
 	}
 
 }
