@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Banca</ui:define>
+
+	<ui:define name="body">
+		<p:panel header="Banca" id="painelBanca">
+			<h:panelGrid columns="2" border="0" cellpadding="30%"
+				cellspacing="30%">
+				<!-- 				<h:panelGroup> -->
+				<!-- 					<h:outputText value="Ano:" /> -->
+				<!-- 					<p:selectOneMenu> -->
+				<!-- 						<f:selectItem itemLabel="2017" /> -->
+				<!-- 					</p:selectOneMenu> -->
+				<!-- 				</h:panelGroup> -->
+				<h:panelGroup>
+					<h:outputText value="TCC:" />
+					<p:selectOneMenu>
+						<f:selectItem
+							itemLabel="#{incluirEditarBancaBean.tcc.discente.usuario.nome} - #{incluirEditarBancaBean.tcc.titulo}" />
+					</p:selectOneMenu>
+				</h:panelGroup>
+			</h:panelGrid>
+			<p:spacer />
+			<h:panelGrid columns="2" border="0" style="width: 100%">
+				<h:panelGroup style="width: 400px">
+					<p:panel header="Horários e Disponibilidade">
+						<h:form id="formHorarios">
+							<h:panelGrid columns="2" border="0">
+								<p:calendar navigator="true" pattern="dd/MM/yyy" effect="fold"
+									value="#{incluirEditarBancaBean.dataSelecionada}">
+									<!-- 								<p:ajax event="dateSelect" update="labelData" /> -->
+								</p:calendar>
+								<h:panelGroup>
+								
+								Hora de início: <p:inputMask size="3" mask="99:99"
+										value="#{incluirEditarBancaBean.horaInicio}" />
+								Hora de fim: <p:inputMask size="3" mask="99:99"
+										value="#{incluirEditarBancaBean.horaFim}" />
+									<p:commandButton ajax="true" update="" value="Pesquisar"
+										style="margin: 3px"
+										actionListener="#{incluirEditarBancaBean.pesquisar}" />
+								</h:panelGroup>
+							</h:panelGrid>
+						</h:form>
+
+					</p:panel>
+				</h:panelGroup>
+				<h:panelGroup style="width: 400px">
+					<p:panel id="painelDocentes" header="Docentes Disponíveis">
+						<p:dataList value="#{incluirEditarBancaBean.docentes}"
+							var="docente" type="ordered" paginator="true" rows="10">
+							<h:outputText value="#{docente.usuario.nome}" />
+						</p:dataList>
+					</p:panel>
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>
