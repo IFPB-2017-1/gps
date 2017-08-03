@@ -30,12 +30,12 @@
 			</h:panelGrid>
 			<p:spacer />
 			<h:panelGrid columns="2" border="0" style="width: 100%">
-				<h:panelGroup style="width: 400px">
+				<h:panelGroup style="width:50%">
 					<p:panel header="Horários e Disponibilidade">
 						<h:form id="formHorarios">
 							<h:panelGrid columns="2" border="0">
 								<p:calendar navigator="true" pattern="dd/MM/yyy" effect="fold"
-									value="#{incluirEditarBancaBean.dataSelecionada}">
+									mode="inline" value="#{incluirEditarBancaBean.dataSelecionada}">
 									<!-- 								<p:ajax event="dateSelect" update="labelData" /> -->
 								</p:calendar>
 								<h:panelGroup>
@@ -44,8 +44,8 @@
 										value="#{incluirEditarBancaBean.horaInicio}" />
 								Hora de fim: <p:inputMask size="3" mask="99:99"
 										value="#{incluirEditarBancaBean.horaFim}" />
-									<p:commandButton ajax="true" update="" value="Pesquisar"
-										style="margin: 3px"
+									<p:commandButton ajax="true" update="painelDocentes"
+										value="Pesquisar" style="margin: 3px"
 										actionListener="#{incluirEditarBancaBean.pesquisar}" />
 								</h:panelGroup>
 							</h:panelGrid>
@@ -53,12 +53,49 @@
 
 					</p:panel>
 				</h:panelGroup>
-				<h:panelGroup style="width: 400px">
+				<h:panelGroup style="width:50%">
 					<p:panel id="painelDocentes" header="Docentes Disponíveis">
-						<p:dataList value="#{incluirEditarBancaBean.docentes}"
-							var="docente" type="ordered" paginator="true" rows="10">
-							<h:outputText value="#{docente.usuario.nome}" />
-						</p:dataList>
+						<h:form id="formDocentes">
+						<p:growl id="msg" showDetail="true" escape="false" />
+							<p:pickList id="DocenteList"
+								value="#{incluirEditarBancaBean.docentes}" var="docente"
+								effect="bounce" itemValue="#{docente}"
+								itemLabel="#{docente.usuario.nome}" showSourceControls="true"
+								showCheckbox="true" responsive="true" showSourceFilter="true"
+								filterMatchMode="contains" >
+
+								<f:facet name="sourceCaption">Docentes disponíveis</f:facet>
+								<f:facet name="targetCaption">Selecionados</f:facet>
+
+								<p:ajax event="transfer" listener="#{incluirEditarBancaBean.onTransfer}"
+									update="msg" />
+								<p:ajax event="select" listener="#{incluirEditarBancaBean.onSelect}"
+									update="msg" />
+								<p:ajax event="unselect" listener="#{incluirEditarBancaBean.onUnselect}"
+									update="msg" />
+								<p:ajax event="reorder" listener="#{incluirEditarBancaBean.onReorder}"
+									update="msg" />
+
+								<p:column style="width:90%;">
+									<h:outputText value="#{docente.usuario.nome}" />
+								</p:column>
+							</p:pickList>
+
+							<p:commandButton id="pojoSubmit" value="Submit"
+								update="displayDocentes" oncomplete="PF('docentesDialog').show()"
+								style="margin-top:5px" />
+
+							<p:dialog modal="true" showEffect="fade" hideEffect="fade"
+								widgetVar="docentesDialog">
+								<h:panelGrid id="displayDocentes" columns="2">
+
+									<h:outputText value="Target: " style="font-weight:bold" />
+									<ui:repeat value="#{incluirEditarBancaBean.docentes.target}" var="docente">
+										<h:outputText value="#{docente.usuario.nome}" style="margin-right:5px" />
+									</ui:repeat>
+								</h:panelGrid>
+							</p:dialog>
+						</h:form>
 					</p:panel>
 				</h:panelGroup>
 			</h:panelGrid>
