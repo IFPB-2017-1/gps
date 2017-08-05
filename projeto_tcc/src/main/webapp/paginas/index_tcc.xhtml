@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>  
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Tcc</ui:define>
+
+	<ui:define name="body">
+		<h1> DEFESAS TCC EM 2017.1 (Relatório Final)</h1>
+		<p:panel id="painelTcc">
+			<h:panelGrid columns="2" border="0" style="width: 100%">
+				<p:panel header="Filtrar">
+					<h:form id="formBuscaTcc">
+						<h:panelGrid columns="2" border="0">
+							<h:panelGroup>
+							<h:commandButton value="Novo" action="add_tcc?faces-redirect=true" />
+							TÍTULO DO TCC: <h:inputText />
+							ORIENTADOR: <h:inputText />
+								<p:commandButton ajax="true" update="" value="Pesquisar"
+									style="margin: 3px"
+									actionListener="#{incluirEditarBancaBean.pesquisar}" />
+							<h:commandButton value="Excluir" action="..." />
+							</h:panelGroup>
+						</h:panelGrid>
+					</h:form>
+				</p:panel>
+				<p:spacer />
+				<h:panelGroup style="width:100%">
+					<p:panel id="index_tcc" header="TCCs em Aberto">
+					  <h:dataTable value="#{tccBean.tccs}" var="tcc" border="1" 
+					    style="background-color:#DCDCDC" cellpadding="5" cellspacing="1" >
+					    <h:column>
+					      <f:facet name="header">Matrícula</f:facet>
+					      <h:outputText value="#{tcc.discente.usuario.matricula}" />
+					    </h:column>
+					    <h:column>
+					      <f:facet name="header">Nome</f:facet>
+					      <h:outputText value="#{tcc.discente.usuario.nome}" />
+					    </h:column>
+					    <h:column>
+					      <f:facet name="header">TÍTULO DO TCC</f:facet>
+					      <h:outputText value="#{tcc.titulo}" />
+					    </h:column>
+					    <h:column>
+					      <f:facet name="header">ORIENTADOR</f:facet>
+					      <h:outputText value="#{tcc.orientador.usuario.nome}" />
+					    </h:column>
+					    <h:column>
+					      <h:commandButton value="Editar" action="#{tccBean.edit}" />
+					    </h:column>
+					  </h:dataTable>
+					</p:panel>
+				</h:panelGroup>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</h:body>
+</html>
