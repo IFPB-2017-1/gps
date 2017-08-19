@@ -1,6 +1,5 @@
 package br.edu.ifpb.tcc.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,14 +21,15 @@ public class Defesa {
 	@Column(name="DS_LOCAL")
 	private String local;
 	
-	@Column(name="DS_DATA")
-	private String data;
-	
-	@Column(name="DS_HORA")
-	private String hora;
+	@Column(name="DT_DATA_HORA")
+	private Date data;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_LOCAL")
+	@JoinColumn(name="ID_ORIENTADOR")
+	private Docente orientador;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_BANCA")
 	private Banca banca;
 	
 	@Column(name="DS_NOTA")
@@ -39,19 +39,7 @@ public class Defesa {
 	private boolean ativo;
 	
 	public Defesa(){}
-	public Defesa(String local, Banca banca){
-		super();
-		this.local = local;
-		this.banca = banca;
-		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-		String dataString = format.format(date);
-		String[] array = new String[2];
-		array = dataString.split(" ");
-		this.data = array[0];
-		this.hora = array[1];
-		this.ativo = true;
-	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -64,18 +52,7 @@ public class Defesa {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	public String getData() {
-		return data;
-	}
-	public void setData(String data) {
-		this.data = data;
-	}
-	public String getHora() {
-		return hora;
-	}
-	public void setHora(String hora) {
-		this.hora = hora;
-	}
+	
 	public Banca getBanca() {
 		return banca;
 	}
@@ -94,10 +71,5 @@ public class Defesa {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	@Override
-	public String toString() {
-		return "Defesa [id=" + id + ", local=" + local + ", data=" + data + ", hora=" + hora + ", banca=" + banca
-				+ ", nota=" + nota + ", ativo=" + ativo + "]";
-	}
-
+	
 }

@@ -36,7 +36,7 @@ import br.edu.ifpb.tcc.entity.Tcc;
 
 @ManagedBean
 @ViewScoped
-public class IncluirEditarBancaBean {
+public class IncluirEditarBancaBean extends GenericBean{
 	
 	private Banca banca;
 	private Defesa defesa;
