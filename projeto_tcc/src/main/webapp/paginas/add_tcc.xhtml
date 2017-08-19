@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>  
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Tcc</ui:define>
+
+	<ui:define name="body">
+		<h1> DEFESAS TCC EM 2017.1 (Relatório Final)</h1>
+		<h:form>
+			TÍTULO DO TCC <h:inputText value="#{tccBean.tcc.titulo}" />
+			TIPO DO TCC <h:inputText value="#{tccBean.tcc.tipo}" />
+			<h:commandButton value="Salvar" action="#{tccBean.add}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</h:body>
+</html>
