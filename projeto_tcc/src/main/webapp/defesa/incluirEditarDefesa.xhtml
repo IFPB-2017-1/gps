@@ -12,7 +12,37 @@
 
 	<ui:define name="body">
 		<p:panel header="Cadastro de Defesa" id="painelCadastro">
-						
+			<p:panelGrid columns="3" styleClass="bordernone table-hover">
+				<h:outputLabel value="Agendar defesa para:" />
+				<h:outputText id="tcc"
+					value="#{incluirEditarDefesaBean.tcc.titulo} de #{incluirEditarDefesaBean.tcc.discente.usuario.nome}" />
+				<h:message for="tcc" />
+
+				<h:outputLabel value="Local:" />
+				<p:inputText id="local" />
+				<h:message for="local" />
+
+				<h:outputLabel value="Data:" />
+				<p:calendar id="data" showOn="button" />
+				<h:message for="data" />
+				
+				<h:outputLabel value="Hora inicio:"/>
+				<p:inputMask mask="99:99" id="horaI" />
+				<h:message for="horaI" />
+				
+				<h:outputLabel value="Hora fim:"/>
+				<p:inputMask mask="99:99" id="horaF" />
+				<h:message for="horaF" />
+				
+				<p:outputLabel value="Banca:"/>
+				<p:lightBox iframe="true" id="lighbox3">
+					<h:outputLink value="http://localhost:8080/agendamentotcc/banca/incluirEditarBanca.jsf">
+						<h:outputText value="Cadastrar" />
+					</h:outputLink>
+				</p:lightBox>
+
+
+			</p:panelGrid>
 		</p:panel>
 	</ui:define>
 </ui:composition>
