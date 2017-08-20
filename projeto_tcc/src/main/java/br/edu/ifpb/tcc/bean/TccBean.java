@@ -12,10 +12,15 @@ import br.edu.ifpb.tcc.dao.DiscenteDAO;
 import br.edu.ifpb.tcc.dao.DocenteDAO;
 import br.edu.ifpb.tcc.dao.TccDAO;
 import br.edu.ifpb.tcc.entity.Tcc;
+import br.edu.ifpb.tcc.entity.Tipo;
 
-@ManagedBean(name = "tccBean")
+@ManagedBean
 @RequestScoped
 public class TccBean {
+	
+	public Tipo[] getTipos(){
+        return Tipo.values();
+    }
 
 	private List<Tcc> tccs;
 	private Tcc tcc;

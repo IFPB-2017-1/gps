@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+</h:head>
+<h:body>  
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Novo Tcc</ui:define>
+
+	<ui:define name="body">
+		<h1>Novo TCC</h1>
+		<h:form>
+			<h:selectOneMenu id="tipos" value="#{tccBean.tcc.tipo}" required="true" requiredMessage="Tipo é obrigatório"
+			 	label="Tipo:" styleClass="form-control">
+				<f:selectItem noSelectionOption="true" itemLabel="Tipo do TCC..." itemValue="#{null}"/>
+				<f:selectItems value="#{utilBean.tipos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}"/>
+			</h:selectOneMenu>
+			<h:inputText id="tcc_matricula" value="#{tccBean.tcc.discente.usuario.nome}" styleClass="form-control" required="true" 
+				requiredMessage="Matrícula é obrigatória" pt:placeholder="Matrícula"/>
+			<h:inputText id="tcc_nome_aluno" value="#{usuarioBean.nome}" styleClass="form-control" pt:placeholder="Nome do aluno" 
+				readonly="true"/>
+			<h:inputText id="tcc_titulo" value="#{tccBean.tcc.titulo}" styleClass="form-control" required="true" 
+				requiredMessage="Título é obrigatório" pt:placeholder="Título"/>
+			<h:selectOneMenu id="orientadores" value="#{tccBean.tcc.orientador.usuario.nome}" required="true" 
+				requiredMessage="Orientador é obrigatório" styleClass="form-control">
+				<f:selectItem noSelectionOption="true" itemLabel="Orientador..." itemValue="#{null}"/>
+				<f:selectItems value="#{utilBean.orientadores}" var="orientador" itemLabel="#{orientador.usuario.nome}" itemValue="#{orientador}"/>
+			</h:selectOneMenu>
+			<h:inputText id="tcc_proposta" value="#{tccBean.tcc.arquivoTCC}" styleClass="form-control" 
+				pt:placeholder="Link da Proposta..."/>
+			<h:inputText id="tcc_aluno_fone" value="#{tccBean.tcc.discente.usuario.telefone}" styleClass="form-control" 
+				pt:placeholder="Telefone..."/>
+			<h:inputText id="tcc_aluno_email" value="#{tccBean.tcc.discente.usuario.email}" styleClass="form-control" 
+				pt:placeholder="Gmail..."/>
+			
+			<!-- TÍTULO DO TCC <h:inputText value="#{tccBean.tcc.titulo}" /> -->
+			<!-- TIPO DO TCC <h:inputText value="#{tccBean.tcc.tipo}" /> -->
+			
+			<h:commandButton value="Salvar" action="#{tccBean.add}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</h:body>
+</html>
