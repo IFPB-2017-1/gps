@@ -124,7 +124,7 @@ public class EntityManagerConversationFilter implements Filter {
 						+ "Rollback n�o efetivado!",
 						rbEx);
 			} finally {
-				logger.error(context + "Cleanup after exception!");
+//				logger.error(context + "Cleanup after exception!");
 
 				// Cleanup
 				currentEntityManager = ManagedEMContext.unbind(emf);

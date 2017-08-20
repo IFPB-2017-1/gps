@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Agendamento de TCC's - Login</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  />
+	<link type="text/css" rel="stylesheet" href="style/login.css" />
+</h:head>
+<h:body>
+
+	<div class="container">
+
+		<h:form id="formLogin" styleClass="form-signin">
+			<h2 class="form-signin-heading">
+				Log<i class="glyphicon glyphicon-phone"></i>n
+			</h2>
+
+			<h:messages infoStyle="color:blue" errorStyle="color:red"
+				layout="table" />
+
+			<p:inputText id="usuario" value="#{loginBean.usuario}"
+				styleClass="form-control" placeholder="usuário" />
+
+			<p:password id="senha" value="#{loginBean.senha}"
+				styleClass="form-control" placeholder="Senha" />
+
+
+			<h:commandButton styleClass="btn btn-lg btn-primary btn-block"
+				action="#{loginBean.autenticar}" value="Entrar" />
+		</h:form>
+
+	</div>
+
+</h:body>
+</html>
