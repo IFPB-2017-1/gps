@@ -13,6 +13,15 @@
 	<link type="text/css" rel="stylesheet" href="style/style.css" />
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<style>
+		.bordernone .ui-datagrid-content{
+    		border: none !important;
+		}
+		.ui-panelgrid td, .ui-panelgrid tr{
+  			  border-style: none !important
+		}
+	</style>
+	
 </h:head>
 
 
@@ -28,7 +37,7 @@
 				<p:menuitem value="Calendário" url="/paginas/calendario.jsf"
 					icon="ui-icon-pencil" />
 				<p:submenu label="Cadastros" icon="ui-icon-document">
-					<p:menuitem value="Discente" url="/paginas/cadastroDiscente.jsf"/>
+					<p:menuitem value="Discente" url="/paginas/cadastroDiscente.jsf" />
 					<p:menuitem value="Docente" url="/paginas/cadastroDocente.jsf" />
 					<p:menuitem value="TCC" url="/tcc/incluirEditarTcc.jsf" />
 				</p:submenu>
