@@ -13,52 +13,38 @@
 	<ui:define name="title">Tcc</ui:define>
 
 	<ui:define name="body">
-		<h1> DEFESAS TCC EM 2017.1 (Relatório Final)</h1>
-		<p:panel id="painelTcc">
-			<h:panelGrid columns="2" border="0" style="width: 100%">
-				<p:panel header="Filtrar">
-					<h:form id="formBuscaTcc">
-						<h:panelGrid columns="2" border="0">
-							<h:panelGroup>
-							<h:commandButton value="Novo" action="add_tcc?faces-redirect=true" />
-							TÍTULO DO TCC: <h:inputText />
-							ORIENTADOR: <h:inputText />
-								<p:commandButton ajax="true" update="" value="Pesquisar"
-									style="margin: 3px"
-									actionListener="#{incluirEditarBancaBean.pesquisar}" />
-							<h:commandButton value="Excluir" action="..." />
-							</h:panelGroup>
-						</h:panelGrid>
-					</h:form>
-				</p:panel>
-				<p:spacer />
-				<h:panelGroup style="width:100%">
-					<p:panel id="index_tcc" header="TCCs em Aberto">
-					  <h:dataTable value="#{tccBean.tccs}" var="tcc" border="1" 
-					    style="background-color:#DCDCDC" cellpadding="5" cellspacing="1" >
-					    <h:column>
-					      <f:facet name="header">Matrícula</f:facet>
-					      <h:outputText value="#{tcc.discente.usuario.matricula}" />
-					    </h:column>
-					    <h:column>
-					      <f:facet name="header">Nome</f:facet>
-					      <h:outputText value="#{tcc.discente.usuario.nome}" />
-					    </h:column>
-					    <h:column>
-					      <f:facet name="header">TÍTULO DO TCC</f:facet>
-					      <h:outputText value="#{tcc.titulo}" />
-					    </h:column>
-					    <h:column>
-					      <f:facet name="header">ORIENTADOR</f:facet>
-					      <h:outputText value="#{tcc.orientador.usuario.nome}" />
-					    </h:column>
-					    <h:column>
-					      <h:commandButton value="Editar" action="#{tccBean.edit}" />
-					    </h:column>
-					  </h:dataTable>
-					</p:panel>
-				</h:panelGroup>
-			</h:panelGrid>
+		<h1> DEFESAS TCC EM 2017.1</h1>
+		<p:panel header="Filtrar">
+				<h:form id="formBuscaTcc">
+					<h:panelGrid columns="2" border="0">
+						<h:panelGroup>
+						TÍTULO DO TCC: <h:inputText />
+						ORIENTADOR: <h:inputText />
+							<p:commandButton ajax="true" update="" value="Pesquisar" style="margin: 3px" actionListener="#{incluirEditarBancaBean.pesquisar}" />
+						</h:panelGroup>
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		<p:panel header="TCC's em Aberto" id="listaTCC">
+			<p:commandButton value="Cadastrar TCC" action="incluirEditarTcc?faces-redirect=true"></p:commandButton>
+			<p:button  value="Remover"/>
+			<p:dataTable var="tcc" value="#{manterDefesaBean.tccLista}" emptyMessage="Nenhuma TCC cadastrado">
+				<p:column headerText=" " >
+		        	<p:selectBooleanCheckbox value="#{null}" />
+				</p:column>
+				<p:column headerText="Título" >
+					<h:outputText value="#{tcc.titulo}"/>
+				</p:column>
+				<p:column headerText="Discente">
+					<h:outputText value="#{tcc.discente.usuario.nome}"/>
+				</p:column>
+				<p:column headerText="Orientador">
+					<h:outputText value="#{tcc.orientador.usuario.nome}"/>
+				</p:column>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{tcc.tipo}" />
+				</p:column>
+			</p:dataTable>
 		</p:panel>
 	</ui:define>
 </ui:composition>
