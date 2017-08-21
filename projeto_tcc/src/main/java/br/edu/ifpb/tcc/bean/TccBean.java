@@ -8,11 +8,16 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
+import org.primefaces.model.diagram.connector.StateMachineConnector.Orientation;
+
 import br.edu.ifpb.tcc.dao.DiscenteDAO;
 import br.edu.ifpb.tcc.dao.DocenteDAO;
 import br.edu.ifpb.tcc.dao.TccDAO;
+import br.edu.ifpb.tcc.entity.Discente;
+import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Tcc;
 import br.edu.ifpb.tcc.entity.Tipo;
+import br.edu.ifpb.tcc.entity.Usuario;
 
 @ManagedBean
 @RequestScoped
@@ -24,6 +29,8 @@ public class TccBean {
 
 	private List<Tcc> tccs;
 	private Tcc tcc;
+	private Usuario orientador;
+	private Usuario discente;
 	private String titulo;
 	
 	private TccDAO tccDao = new TccDAO();
@@ -34,6 +41,8 @@ public class TccBean {
 	public void init(){
 		tccs = tccDao.findAll();
 		tcc = new Tcc();
+		orientador = new Usuario();
+		discente = new Usuario();
 	}
 
 	public String edit() {
@@ -43,10 +52,10 @@ public class TccBean {
 	}
 	
 	public String add() {
-		Tcc novo;
-		novo = new Tcc();
-		novo.setDiscente(discenteDao.find(1));
-		novo.setOrientador(docenteDao.find(10));
+		Tcc novo = new Tcc();
+		novo.setDiscente(discenteDao.findByMatricula(this.discente.getMatricula()));
+		Docente teste = docenteDao.findDocente(this.tcc.getOrientador().getUsuario());
+		novo.setOrientador(teste);
 		novo.setTipo(tcc.getTipo());
 		novo.setTitulo(tcc.getTitulo());
 
@@ -86,6 +95,22 @@ public class TccBean {
 
 	public void setTccDao(TccDAO tccDao) {
 		this.tccDao = tccDao;
-	}	
+	}
+
+	public Usuario getOrientador() {
+		return orientador;
+	}
+
+	public void setOrientador(Usuario orientador) {
+		this.orientador = orientador;
+	}
+
+	public Usuario getDiscente() {
+		return discente;
+	}
+
+	public void setDiscente(Usuario discente) {
+		this.discente = discente;
+	}
 	
 }

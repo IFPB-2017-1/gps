@@ -22,22 +22,23 @@
 				<f:selectItem noSelectionOption="true" itemLabel="Tipo do TCC..." itemValue="#{null}"/>
 				<f:selectItems value="#{utilBean.tipos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}"/>
 			</h:selectOneMenu>
-			<h:inputText id="tcc_matricula" value="#{tccBean.tcc.discente.usuario.nome}" styleClass="form-control" required="true" 
+			<h:inputText id="tcc_matricula" value="#{tccBean.discente.matricula}" styleClass="form-control" required="true" 
 				requiredMessage="Matrícula é obrigatória" pt:placeholder="Matrícula"/>
 			<h:inputText id="tcc_nome_aluno" value="#{usuarioBean.nome}" styleClass="form-control" pt:placeholder="Nome do aluno" 
 				readonly="true"/>
 			<h:inputText id="tcc_titulo" value="#{tccBean.tcc.titulo}" styleClass="form-control" required="true" 
 				requiredMessage="Título é obrigatório" pt:placeholder="Título"/>
-			<h:selectOneMenu id="orientadores" value="#{tccBean.tcc.orientador.usuario.nome}" required="true" 
+			<h:selectOneMenu id="orientadores" value="#{tccBean.tcc.orientador}" required="true" 
 				requiredMessage="Orientador é obrigatório" styleClass="form-control">
+				<f:converter converterId="DocenteConverter"/>
 				<f:selectItem noSelectionOption="true" itemLabel="Orientador..." itemValue="#{null}"/>
 				<f:selectItems value="#{utilBean.orientadores}" var="orientador" itemLabel="#{orientador.usuario.nome}" itemValue="#{orientador}"/>
 			</h:selectOneMenu>
 			<h:inputText id="tcc_proposta" value="#{tccBean.tcc.arquivoTCC}" styleClass="form-control" 
 				pt:placeholder="Link da Proposta..."/>
-			<h:inputText id="tcc_aluno_fone" value="#{tccBean.tcc.discente.usuario.telefone}" styleClass="form-control" 
+			<h:inputText id="tcc_aluno_fone" value="#{tccBean.discente.telefone}" styleClass="form-control" 
 				pt:placeholder="Telefone..."/>
-			<h:inputText id="tcc_aluno_email" value="#{tccBean.tcc.discente.usuario.email}" styleClass="form-control" 
+			<h:inputText id="tcc_aluno_email" value="#{tccBean.discente.email}" styleClass="form-control" 
 				pt:placeholder="Gmail..."/>
 			
 			<!-- TÍTULO DO TCC <h:inputText value="#{tccBean.tcc.titulo}" /> -->
