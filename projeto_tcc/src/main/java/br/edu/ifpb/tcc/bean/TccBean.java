@@ -4,17 +4,15 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-
-import org.primefaces.model.diagram.connector.StateMachineConnector.Orientation;
 
 import br.edu.ifpb.tcc.dao.DiscenteDAO;
 import br.edu.ifpb.tcc.dao.DocenteDAO;
 import br.edu.ifpb.tcc.dao.TccDAO;
 import br.edu.ifpb.tcc.entity.Discente;
-import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Tcc;
 import br.edu.ifpb.tcc.entity.Tipo;
 import br.edu.ifpb.tcc.entity.Usuario;
@@ -23,26 +21,23 @@ import br.edu.ifpb.tcc.entity.Usuario;
 @RequestScoped
 public class TccBean {
 	
-	public Tipo[] getTipos(){
-        return Tipo.values();
-    }
-
+	@ManagedProperty(value="#{loginBean}")
+	private LoginBean login;
 	private List<Tcc> tccs;
 	private Tcc tcc;
 	private Usuario orientador;
-	private Usuario discente;
 	private String titulo;
-	
+	private Discente discente;
 	private TccDAO tccDao = new TccDAO();
-	DiscenteDAO discenteDao = new DiscenteDAO();
-	DocenteDAO docenteDao = new DocenteDAO();
+	private DiscenteDAO discenteDao = new DiscenteDAO();
+	private DocenteDAO docenteDao = new DocenteDAO();
 	
 	@PostConstruct
 	public void init(){
 		tccs = tccDao.findAll();
 		tcc = new Tcc();
 		orientador = new Usuario();
-		discente = new Usuario();
+		discente = discenteDao.findDiscente(login.getUsuarioLogado());
 	}
 
 	public String edit() {
@@ -53,17 +48,20 @@ public class TccBean {
 	
 	public String add() {
 		Tcc novo = new Tcc();
-		novo.setDiscente(discenteDao.findByMatricula(this.discente.getMatricula()));
-		Docente teste = docenteDao.findDocente(this.tcc.getOrientador().getUsuario());
-		novo.setOrientador(teste);
+		novo.setDiscente(discente);
+		novo.setOrientador(docenteDao.findDocente(this.tcc.getOrientador().getUsuario()));
 		novo.setTipo(tcc.getTipo());
 		novo.setTitulo(tcc.getTitulo());
-
 		tccDao.beginTransaction();
 		tccDao.insert(novo);
+		discenteDao.update(discente);
 		tccDao.commit();
 		return "index_tcc";
 	}
+	
+	public Tipo[] getTipos(){
+        return Tipo.values();
+    }
 
 	public List<Tcc> getTccs() {
 		return tccs;
@@ -89,14 +87,6 @@ public class TccBean {
 		this.titulo = titulo;
 	}
 
-	public TccDAO getTccDao() {
-		return tccDao;
-	}
-
-	public void setTccDao(TccDAO tccDao) {
-		this.tccDao = tccDao;
-	}
-
 	public Usuario getOrientador() {
 		return orientador;
 	}
@@ -105,11 +95,15 @@ public class TccBean {
 		this.orientador = orientador;
 	}
 
-	public Usuario getDiscente() {
+	public void setLogin(LoginBean login) {
+		this.login = login;
+	}
+
+	public Discente getDiscente() {
 		return discente;
 	}
 
-	public void setDiscente(Usuario discente) {
+	public void setDiscente(Discente discente) {
 		this.discente = discente;
 	}
 	
