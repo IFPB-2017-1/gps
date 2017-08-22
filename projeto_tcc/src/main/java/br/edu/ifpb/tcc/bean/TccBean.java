@@ -1,6 +1,9 @@
 package br.edu.ifpb.tcc.bean;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +31,7 @@ public class TccBean {
 	private Usuario orientador;
 	private String titulo;
 	private Discente discente;
+    private boolean excluir;
 	private TccDAO tccDao = new TccDAO();
 	private DiscenteDAO discenteDao = new DiscenteDAO();
 	private DocenteDAO docenteDao = new DocenteDAO();
@@ -58,6 +62,24 @@ public class TccBean {
 		tccDao.commit();
 		return "index_tcc";
 	}
+	
+	private Map<Integer, Boolean> checked = new HashMap<>(); 
+
+	public void delete(){
+			List<Tcc> tccs = new ArrayList<Tcc>();
+	        for (Tcc tcc : tccs) {
+	            Boolean itemChecked = checked.get(tcc.getId());
+	            if (itemChecked !=null && itemChecked) {
+	            	tccDao.delete(tcc);
+	            }
+	        }
+//	        if (!checked.isEmpty()) {
+//	        	infoMessage = "Tcc(s) removido com sucesso.";
+//	        }
+	    checked.clear();
+	}
+
+
 	
 	public Tipo[] getTipos(){
         return Tipo.values();
@@ -105,6 +127,14 @@ public class TccBean {
 
 	public void setDiscente(Discente discente) {
 		this.discente = discente;
+	}
+
+	public boolean isExcluir() {
+		return excluir;
+	}
+
+	public void setExcluir(boolean excluir) {
+		this.excluir = excluir;
 	}
 	
 }

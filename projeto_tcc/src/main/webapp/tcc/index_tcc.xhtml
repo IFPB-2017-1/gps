@@ -27,11 +27,8 @@
 			</p:panel>
 		<p:panel header="TCC's em Aberto" id="listaTCC">
 			<p:commandButton value="Cadastrar TCC" action="incluirEditarTcc?faces-redirect=true"></p:commandButton>
-			<p:button  value="Remover"/>
+			<p:commandButton value="Remover" actionListener="#{tccBean.delete}"></p:commandButton>
 			<p:dataTable var="tcc" value="#{manterDefesaBean.tccLista}" emptyMessage="Nenhuma TCC cadastrado">
-				<p:column headerText=" " >
-		        	<p:selectBooleanCheckbox value="#{null}" />
-				</p:column>
 				<p:column headerText="Título" >
 					<h:outputText value="#{tcc.titulo}"/>
 				</p:column>
