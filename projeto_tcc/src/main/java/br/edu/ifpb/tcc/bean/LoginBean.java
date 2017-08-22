@@ -5,6 +5,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.edu.ifpb.tcc.dao.DiscenteDAO;
+import br.edu.ifpb.tcc.dao.DocenteDAO;
+import br.edu.ifpb.tcc.entity.Discente;
+import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Usuario;
 import br.edu.ifpb.tcc.facade.LoginController;
 
@@ -18,11 +22,20 @@ public class LoginBean extends GenericBean {
 	private String senha;
 	private Usuario usuarioLogado;
 	
+	private DocenteDAO docenteDAO = new DocenteDAO();
+	private DiscenteDAO discenteDAO = new DiscenteDAO();
+	private Docente docente;
+	private Discente discente;
+	
 	public String autenticar() {
 		String proxView = null;
 		LoginController ctr = new LoginController();
 		if ((usuarioLogado = ctr.isValido(usuario, senha)) != null) {
 			this.setValueOf("#{sessionScope.loginUser}", String.class, usuarioLogado.getEmail());
+			docente = docenteDAO.findDocente(usuarioLogado);
+			if(docente == null){
+				discente = discenteDAO.findDiscente(usuarioLogado);
+			}
 			proxView = "/index.jsf?faces-redirect=true";
 		} else {
 			FacesMessage msg = new FacesMessage("Login inválido.");
@@ -60,6 +73,22 @@ public class LoginBean extends GenericBean {
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
 		this.usuarioLogado = usuarioLogado;
+	}
+
+	public Docente getDocente() {
+		return docente;
+	}
+
+	public void setDocente(Docente docente) {
+		this.docente = docente;
+	}
+
+	public Discente getDiscente() {
+		return discente;
+	}
+
+	public void setDiscente(Discente discente) {
+		this.discente = discente;
 	}
 
 }

@@ -1,10 +1,11 @@
 package br.edu.ifpb.tcc.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,20 +40,21 @@ public class Tcc {
 	private boolean aprovado;
 	
 	@Column(name="DS_TIPO")
-	private String tipo;
+	@Enumerated(EnumType.STRING)
+	private Tipo tipo;
 	
 	@OneToMany
 	@JoinColumn(name="ID_DEFESA")
 	private List<Defesa> defesas;
 	
-	public Tcc(){}
-	public Tcc(String titulo, Discente discente, String tipo){
-		super();
-		this.titulo = titulo;
-		this.discente = discente;
-		this.tipo = tipo;
-		this.defesas = new ArrayList<Defesa>();
-	}
+//	public Tcc(){}
+//	public Tcc(String titulo, Discente discente, Tipo tipo){
+//		super();
+//		this.titulo = titulo;
+//		this.discente = discente;
+//		this.tipo = tipo;
+//		this.defesas = new ArrayList<Defesa>();
+//	}
 	
 	public Integer getId() {
 		return id;
@@ -100,11 +102,11 @@ public class Tcc {
 		this.aprovado = aprovado;
 	}
 
-	public String getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 
