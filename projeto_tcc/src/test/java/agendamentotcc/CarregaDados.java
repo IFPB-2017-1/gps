@@ -21,6 +21,7 @@ import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Horario;
 import br.edu.ifpb.tcc.entity.HorarioEnum;
 import br.edu.ifpb.tcc.entity.Tcc;
+import br.edu.ifpb.tcc.entity.Tipo;
 import br.edu.ifpb.tcc.entity.Usuario;
 import br.edu.ifpb.tcc.util.PasswordUtil;
 
@@ -89,7 +90,7 @@ public class CarregaDados {
 
 		tcc.setDiscente(discenteDao.find(1));
 		tcc.setOrientador(docenteDao.find(255));
-		tcc.setTipo("TCC");
+		tcc.setTipo(Tipo.PSQ);
 		tcc.setTitulo("Título da Defesa do TCC");
 
 		tccDao.beginTransaction();

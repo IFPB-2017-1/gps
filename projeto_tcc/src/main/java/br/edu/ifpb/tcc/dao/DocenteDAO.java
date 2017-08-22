@@ -1,6 +1,5 @@
 package br.edu.ifpb.tcc.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,9 +27,22 @@ public class DocenteDAO extends GenericDAO<Docente, Integer> {
 		try {
 			docente = (Docente) q.getSingleResult();
 		} catch (Exception e) {
-
+			
 		}
 		return docente;
+	}
+	
+	//Buscar docentes com horário no dia da semana
+	@SuppressWarnings("unchecked")
+	public List<Docente> pesquisarDiaSemana (String dia){
+		Query q = this.getEntityManager().createQuery("select distinct h.docente from Horario h where h.diaSemana != 'SEGUNDA' and h.curso='SISTEMAS PARA INTERNET'" );
+		return q.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Docente> pesquisarTSI(){
+		Query q = this.getEntityManager().createQuery("select distinct h.docente from Horario h where h.curso='SISTEMAS PARA INTERNET'" );
+		return q.getResultList();
 	}
 
 }
