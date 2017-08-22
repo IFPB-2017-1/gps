@@ -13,7 +13,6 @@
 	<ui:define name="body">
 		<p:panel header="Defesas" id="painelDefesa">
 		<p:panel header="TCC's" id="listaTCC">
-				<p:button  value="Cadastrar TCC"/>
 				<p:dataTable var="tcc" value="#{manterDefesaBean.tccLista}" emptyMessage="Nenhuma TCC cadastrado">
 					<p:column headerText="Título" >
 						<h:outputText value="#{tcc.titulo}"/>
@@ -30,18 +29,24 @@
 					<p:column headerText="Ações" style="width:5%;">
 						<h:form>
 							<h:commandLink title="Agendar Defesa" actionListener="#{incluirEditarDefesaBean.carregaTcc(tcc)}"
-							 action="incluirEditarDefesa" styleClass="glyphicon glyphicon-plus"  />
+							 action="incluirEditarDefesa?faces-redirect=true" styleClass="glyphicon glyphicon-plus"  />
 						</h:form>
 					</p:column>
 				</p:dataTable>
 			</p:panel>
 			
 			<p:panel header="Lista de defesas" id="listaDefesas">
-				<p:dataTable emptyMessage="Nenhuma defesa cadastrada ou agendada">
-					<p:column headerText="Defesa" />
-					<p:column headerText="Orientador" />
-					<p:column headerText="Avaliadores" />
-					<p:column headerText="Data da defesa" />
+				<p:dataTable value="#{manterDefesaBean.defesas}" var="defesa" 
+					emptyMessage="Nenhuma defesa cadastrada ou agendada">
+					<p:column headerText="Local" >
+						<h:outputText value="#{defesa.local}"/>
+					</p:column>
+					<p:column headerText="Avaliadores" >
+						<h:outputText value="#{defesa.avaliadores}"/>
+					</p:column>
+					<p:column headerText="Data da defesa">
+						<h:outputText value="#{defesa.data}"/>
+					</p:column>
 				</p:dataTable>
 			</p:panel>
 		</p:panel>
