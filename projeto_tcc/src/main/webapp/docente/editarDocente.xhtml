@@ -10,13 +10,12 @@
 	<ui:define name="title">Editar Docente</ui:define>
 	
 	
-	
 	<ui:define name="body">
 	
 	<h:messages />
 	
-	<div id="divFormDiscente">
-	<h:form id="formDiscente">
+	<div id="divFormDocente">
+	<h:form id="formDocente">
 	<div id="contentEsquerdo">
 		<h1>Atualize os dados</h1>
 		
@@ -38,19 +37,16 @@
 		Telefone
 		<br/><h:inputText id="telefone" name="telefone" value="#{flash.keepe.telefone}"/><br/><br/>
 		
-		Curso
-		<br/><h:inputText id="curso" name="curso" value="#{flash.keepe.curso}"/><br/><br/><br/>
-		
-		Periodo
-		<br/><h:inputText id="periodo" name="periodo" value="#{flash.keepe.periodo}"/><br/><br/><br/>
+		Disciplina
+		<br/><h:inputText id="disciplina" name="disciplina" value="#{flash.keepe.disciplina}"/><br/><br/><br/>
 		
 		
 	</div>
 	<div id="contentDireito">
 		<br/><br/>	
-		<h:commandButton id="btAtualizar" name="btAtualizar" value="Atualizar dados" action="#{beanDiscente.atualizar}" />
+		<h:commandButton id="btAtualizar" name="btAtualizar" value="Atualizar dados" action="#{beanDocente.atualizar}" />
 		<br/><br/>
-		<h:commandButton id="btCancelar" name="btCancelar" value="Cancelar" action="/discente/listarDiscentes"/>
+		<h:commandButton id="btCancelar" name="btCancelar" value="Cancelar" action="/docente/listarDocentes"/>
 		<br/><br/><br/>
 	</div>
 	</h:form> <!-- Fim do formulario de docente -->

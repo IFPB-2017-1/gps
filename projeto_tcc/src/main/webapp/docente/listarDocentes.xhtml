@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Lista de Docentes</ui:define>
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{beanDocente.listarDocentes}" />
+	</f:metadata>
+	
+	<ui:define name="body">
+	<h:form id="formContentListaarDocente">
+	    <h:dataTable value="#{beanDocente.listaDocentes}" var="docente" rowClasses="blueRow, greenRow"
+	    cellpadding="5" cellspacing="1" border="1">
+	    <h:column>
+	    	<f:facet name="header">Nome</f:facet>
+	    	<h:commandLink id="linkNome" name="linkNome" value="#{docente.usuario.nome}"  action="#{beanDocente.editarDocente}">
+	    		<f:setPropertyActionListener value="#{docente.id}" target="#{beanDocente.id}"/>
+	    	</h:commandLink>
+	    </h:column>
+	    <h:column>
+	    	<f:facet name="header">Email</f:facet>
+	    	#{docente.usuario.email}
+	    </h:column>
+	    <h:column>
+	    	<f:facet name="header">Telefone</f:facet>
+	    	#{docente.usuario.telefone}
+	    </h:column>
+	    <h:column>
+	    	<f:facet name="header">Matricula</f:facet>
+	    	#{docente.usuario.matricula}
+	    </h:column>
+	    <h:column>
+	    	<f:facet name="header">#</f:facet>
+	    	<h:commandLink value="excluir" action="#{beanDocente.excluir}">
+	    		<f:setPropertyActionListener value="#{docente.id}" target="#{beanDocente.id}"/>
+	    	</h:commandLink>
+	    </h:column>
+	    </h:dataTable><br/><br/>
+	    
+	    <h:commandButton value="Novo Cadastro" action="/docente/cadastroDocente?faces-redirect=true"/><br/><br/>
+	</h:form>
+	</ui:define>
+	<ui:define name="footer">
+	    <ui:include src="/templates/footerBase.xhtml"/>
+	</ui:define>
+</ui:composition>
+</html>

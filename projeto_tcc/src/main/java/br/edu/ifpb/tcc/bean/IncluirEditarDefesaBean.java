@@ -117,18 +117,15 @@ public class IncluirEditarDefesaBean extends GenericBean{
 
 	public String salvarDefesa(){
 		
-//		for(Docente d : docentes.getTarget()){
-//			defesa.getAvaliadores().add(d);
-//		}
 		defesa.setAvaliadores(docentes.getTarget());
 		defesaDao.beginTransaction();
 		defesaDao.insert(defesa);
 		defesaDao.commit();
 		
-//		tcc.getDefesas().add(defesa);
-//		tccDao.beginTransaction();
-//		tccDao.update(tcc);
-//		tccDao.commit();
+		tcc.getDefesas().add(defesa);
+		tccDao.beginTransaction();
+		tccDao.update(tcc);
+		tccDao.commit();
 		
 		return "manterDefesa?faces-redirect=true";
 	}
