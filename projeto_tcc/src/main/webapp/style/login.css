@@ -43,3 +43,31 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.btn-login-blue{
+	background: #5FCEC0 !important;
+    color: #fff;
+    box-shadow: 0 0 0 2px #5FCEC0;
+    border: none !important;
+}
+
+.input-login{
+	height: 45px;
+	width: 100%;
+	margin-bottom: 10px;
+	box-shadow: 0 0 0 2px #5FCEC0;
+}
+
+.img-logo{
+	position: relative;
+	border-right: 5px solid gray;
+	
+}
+
+.container-center{
+	width: 80%;
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
