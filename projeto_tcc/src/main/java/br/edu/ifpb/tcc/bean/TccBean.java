@@ -51,7 +51,7 @@ public class TccBean {
 		flash.put("tipo", tcc.getTipo());
 		flash.put("orientador", tcc.getOrientador());
 		flash.put("proposta", tcc.getArquivoTCC());
-		flash.put("tcc", tcc);
+		flash.put("id", tcc.getId());
 		return"editarTcc?faces-redirect=true";
 	}
 	
@@ -70,7 +70,8 @@ public class TccBean {
 	
 	public String update() {
 		Flash flash= FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		Tcc tcc = new Tcc();
+		String id = (String) flash.get("id");
+		tcc = tccDao.find(Integer.parseInt(id));
 		String titulo = (String) flash.get("titulo");
 		Docente orientador = (Docente) flash.get("orientador");
 		tcc.setDiscente(discente);
