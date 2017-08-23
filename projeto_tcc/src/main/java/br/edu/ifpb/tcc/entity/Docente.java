@@ -104,8 +104,7 @@ public class Docente {
 
 	@Override
 	public String toString() {
-		return "Docente [id=" + id + ", usuario=" + usuario + ", " + ", convites=" + convites
-				+ ", agenda=" + agenda + "]";
+		return usuario.getNome();
 	}
 	
 }

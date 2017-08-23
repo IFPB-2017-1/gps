@@ -2,10 +2,12 @@ package br.edu.ifpb.tcc.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,8 +45,8 @@ public class Tcc {
 	@Enumerated(EnumType.STRING)
 	private Tipo tipo;
 	
-	@OneToMany
-	@JoinColumn(name="ID_DEFESA")
+	@OneToMany (mappedBy="tcc",  cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+//	@JoinColumn(name="ID_DEFESA")
 	private List<Defesa> defesas;
 	
 //	public Tcc(){}

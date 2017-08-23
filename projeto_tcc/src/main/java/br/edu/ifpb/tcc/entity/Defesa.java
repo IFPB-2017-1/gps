@@ -21,62 +21,64 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="TB_DEFESA")
+@Table(name = "TB_DEFESA")
 public class Defesa {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-//	@ManyToOne (cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-//	@JoinColumn (name="TCC_ID")
-//	private Tcc tcc;
-	
-	@Column(name="DS_LOCAL")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Tcc tcc;
+
+	@Column(name = "DS_LOCAL")
 	private String local;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="DT_DATA_HORA")
+	@Column(name = "DT_DATA_HORA")
 	private Date data;
-	
-	@Column(name="HORA_INICIO")
+
+	@Column(name = "HORA_INICIO")
 	private String horaInicio;
-	
-	@Column(name="HORA_FIM")
+
+	@Column(name = "HORA_FIM")
 	private String horaFim;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)  
-    @JoinTable(name="DEFESA_AVALIADORES", 
-              joinColumns={@JoinColumn(name="DEFESA_ID", 
-               referencedColumnName="id")},  
-              inverseJoinColumns={@JoinColumn(name="DOCENTE_ID", 
-                referencedColumnName="NU_ID")}) 
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "DEFESA_AVALIADORES", joinColumns = {
+			@JoinColumn(name = "DEFESA_ID", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "DOCENTE_ID", referencedColumnName = "NU_ID") })
 	private List<Docente> avaliadores;
-	
-	@Column(name="DS_NOTA")
+
+	@Column(name = "DS_NOTA")
 	private double nota;
-	
-	@Column(name="SITUACAO")
+
+	@Column(name = "SITUACAO")
 	@Enumerated(EnumType.STRING)
 	private SituacaoEnum situacao;
-	
-	public Defesa(){}
-	
+
+	public Defesa() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getLocal() {
 		return local;
 	}
+
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	
+
 	public double getNota() {
 		return nota;
 	}
+
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
@@ -119,6 +121,14 @@ public class Defesa {
 
 	public void setSituacao(SituacaoEnum situacao) {
 		this.situacao = situacao;
-	}	
-	
+	}
+
+	public Tcc getTcc() {
+		return tcc;
+	}
+
+	public void setTcc(Tcc tcc) {
+		this.tcc = tcc;
+	}
+
 }
