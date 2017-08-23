@@ -1,6 +1,7 @@
 package br.edu.ifpb.tcc.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +34,10 @@ public class Defesa {
 	@ManyToOne
 	@JoinColumn(name="ID_BANCA")
 	private Banca banca;
+	
+	@ManyToMany
+	@JoinColumn
+	private List<Docente> avaliadores;
 	
 	@Column(name="DS_NOTA")
 	private double nota;
@@ -70,6 +77,22 @@ public class Defesa {
 	}
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public List<Docente> getAvaliadores() {
+		return avaliadores;
+	}
+
+	public void setAvaliadores(List<Docente> avaliadores) {
+		this.avaliadores = avaliadores;
 	}
 	
 }
