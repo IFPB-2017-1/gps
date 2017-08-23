@@ -65,7 +65,7 @@ public class TccBean {
 		tccDao.insert(novo);
 		discenteDao.update(discente);
 		tccDao.commit();
-		return "index_tcc";
+		return "/tcc/indexTcc?faces-redirect=true";
 	}
 	
 	public String update() {
@@ -81,7 +81,7 @@ public class TccBean {
 		tccDao.update(tcc);
 		discenteDao.update(discente);
 		tccDao.commit();
-		return "indexTcc";
+		return "/tcc/indexTcc?faces-redirect=true";
 	}
 	
 //	private Map<Integer, Boolean> checked = new HashMap<>(); 
