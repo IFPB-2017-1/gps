@@ -40,6 +40,7 @@
 				<h:inputText id="tcc_aluno_fone" value="#{tccBean.discente.usuario.telefone}" styleClass="form-control" pt:placeholder="Telefone..."/>
 				<h:outputLabel>Email:</h:outputLabel>
 				<h:inputText id="tcc_aluno_email" value="#{tccBean.discente.usuario.email}" styleClass="form-control" pt:placeholder="Email..."/>
+				<h:inputHidden value="#{flash.id}"></h:inputHidden>
 				<h:commandButton value="Salvar" action="#{tccBean.update}" />
 			</p:panelGrid>
 		</h:form>
