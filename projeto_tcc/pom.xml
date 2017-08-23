@@ -15,7 +15,6 @@
 	</repositories>
 
 	<dependencies>
-
 		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>

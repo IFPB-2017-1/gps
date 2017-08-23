@@ -15,34 +15,37 @@
 	<ui:define name="title">Novo Tcc</ui:define>
 
 	<ui:define name="body">
-		<h1>Novo TCC</h1>
-		<h:form>
-			<p:panelGrid columns="1" styleClass="bordernone table-hover">
-				<h:outputLabel>Tipo:</h:outputLabel>
-				<h:selectOneMenu id="tipos" value="#{tccBean.tcc.tipo}" required="true" requiredMessage="Tipo é obrigatório" styleClass="form-control">
-					<f:selectItem noSelectionOption="true" itemLabel="Tipo do TCC..." itemValue="#{null}"/>
-					<f:selectItems value="#{utilBean.tipos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}"/>
-				</h:selectOneMenu>
-				<h:outputLabel>Nome:</h:outputLabel>
-				<h:inputText id="tcc_nome_aluno" value="#{loginBean.discente.usuario.nome}" styleClass="form-control" pt:placeholder="Nome do aluno..." readonly="true"/>
-				<h:outputLabel>Título:</h:outputLabel>
-				<h:inputText id="tcc_titulo" value="#{tccBean.tcc.titulo}" styleClass="form-control" required="true" requiredMessage="Título é obrigatório" pt:placeholder="Título"/>
-				<h:outputLabel>Orientador:</h:outputLabel>
-				<h:selectOneMenu id="orientadores" value="#{tccBean.tcc.orientador}" required="true" 
-					requiredMessage="Orientador é obrigatório" styleClass="form-control">
-					<f:converter converterId="DocenteConverter"/>
-					<f:selectItem noSelectionOption="true" itemLabel="Orientador..." itemValue="#{null}"/>
-					<f:selectItems value="#{utilBean.orientadores}" var="orientador" itemLabel="#{orientador.usuario.nome}" itemValue="#{orientador}"/>
-				</h:selectOneMenu>
-				<h:outputLabel>Link da Proposta:</h:outputLabel>
-				<h:inputText id="tcc_proposta" value="#{tccBean.tcc.arquivoTCC}" styleClass="form-control" pt:placeholder="Link da Proposta..."/>
-				<h:outputLabel>Telefone:</h:outputLabel>
-				<h:inputText id="tcc_aluno_fone" value="#{tccBean.discente.usuario.telefone}" styleClass="form-control" pt:placeholder="Telefone..."/>
-				<h:outputLabel>Email:</h:outputLabel>
-				<h:inputText id="tcc_aluno_email" value="#{tccBean.discente.usuario.email}" styleClass="form-control" pt:placeholder="Email..."/>
-				<h:commandButton value="Salvar" action="#{tccBean.add}" />
-			</p:panelGrid>
-		</h:form>
+		<div class="container-padding">
+			<h1 class="panel-title-h1">Novo TCC</h1>
+			<h:form>
+				<p:panelGrid columns="4" styleClass="bordernone table-hover">
+					<h:outputLabel>Tipo:</h:outputLabel>
+					<h:selectOneMenu id="tipos" value="#{tccBean.tcc.tipo}" required="true" requiredMessage="Tipo é obrigatório" styleClass="form-control">
+						<f:selectItem noSelectionOption="true" itemLabel="Tipo do TCC..." itemValue="#{null}"/>
+						<f:selectItems value="#{utilBean.tipos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo}"/>
+					</h:selectOneMenu>
+					<h:outputLabel>Nome:</h:outputLabel>
+					<h:inputText id="tcc_nome_aluno" value="#{loginBean.discente.usuario.nome}" styleClass="form-control" pt:placeholder="Nome do aluno..." readonly="true"/>
+					<h:outputLabel>Título:</h:outputLabel>
+					<h:inputText id="tcc_titulo" value="#{tccBean.tcc.titulo}" styleClass="form-control" required="true" requiredMessage="Título é obrigatório" pt:placeholder="Título"/>
+					<h:outputLabel>Orientador:</h:outputLabel>
+					<h:selectOneMenu id="orientadores" value="#{tccBean.tcc.orientador}" required="true" 
+						requiredMessage="Orientador é obrigatório" styleClass="form-control">
+						<f:converter converterId="DocenteConverter"/>
+						<f:selectItem noSelectionOption="true" itemLabel="Orientador..." itemValue="#{null}"/>
+						<f:selectItems value="#{utilBean.orientadores}" var="orientador" itemLabel="#{orientador.usuario.nome}" itemValue="#{orientador}"/>
+					</h:selectOneMenu>
+					<h:outputLabel>Link da Proposta:</h:outputLabel>
+					<h:inputText id="tcc_proposta" value="#{tccBean.tcc.arquivoTCC}" styleClass="form-control" pt:placeholder="Link da Proposta..."/>
+					<h:outputLabel>Telefone:</h:outputLabel>
+					<h:inputText id="tcc_aluno_fone" value="#{tccBean.discente.usuario.telefone}" styleClass="form-control" pt:placeholder="Telefone..."/>
+					<h:outputLabel>Email:</h:outputLabel>
+					<h:inputText id="tcc_aluno_email" value="#{tccBean.discente.usuario.email}" styleClass="form-control" pt:placeholder="Email..."/>
+					<h:commandButton value="Salvar" action="#{tccBean.add}" />
+				</p:panelGrid>
+			</h:form>
+		</div>
+		
 	</ui:define>
 </ui:composition>
 </h:body>
