@@ -32,23 +32,21 @@
 
 					<h:outputLabel value="Hora inicio:" />
 					<p:inputMask mask="99:99" id="horaI"
-						value="#{incluirEditarDefesaBean.horaInicio}" />
+						value="#{incluirEditarDefesaBean.defesa.horaInicio}" />
 					<h:message for="horaI" />
 
 					<h:outputLabel value="Hora fim:" />
 					<p:inputMask mask="99:99" id="horaF"
-						value="#{incluirEditarDefesaBean.horaFim}" />
+						value="#{incluirEditarDefesaBean.defesa.horaFim}" />
 					<h:message for="horaF" />
 
 					<p:outputLabel value="Banca:" />
 					<h:panelGroup>
-						<h:outputText value="#{incluirEditarDefesaBean.banca.avaliadores}"
-							rendered="#{incluirEditarDefesaBean.banca.avaliadores != null}" />
+						<h:outputText value="#{incluirEditarDefesaBean.defesa.avaliadores}"
+							rendered="#{incluirEditarDefesaBean.defesa.avaliadores != null}" />
 						<p:commandButton 
 							value="Pesquisar" style="margin: 3px" update="painelCadastro"
 							actionListener="#{incluirEditarDefesaBean.pesquisar}" />
-						<p:commandButton value="Exluir" style="margin: 3px"
-							rendered="#{incluirEditarDefesaBean.banca!=null}" />
 					</h:panelGroup>
 
 				</p:panelGrid>
@@ -56,7 +54,7 @@
 
 				<p:pickList id="DocenteList"
 					value="#{incluirEditarDefesaBean.docentes}" var="docente"
-					effect="bounce" itemValue="#{docente}"
+					effect="bounce" itemValue="#{docente}" converter="PickListConverter"
 					itemLabel="#{docente.usuario.nome}" showSourceControls="false"
 					showCheckbox="true" responsive="true" showSourceFilter="true"
 					filterMatchMode="contains">

@@ -38,7 +38,7 @@ import br.edu.ifpb.tcc.entity.Tcc;
 @ViewScoped
 public class IncluirEditarDefesaBean extends GenericBean{
 	
-	private Banca banca;
+//	private Banca banca;
 	private Defesa defesa;
 	private Tcc tcc;
 	private LocalDate ld;
@@ -48,10 +48,8 @@ public class IncluirEditarDefesaBean extends GenericBean{
 	private List<Docente> docentesSource;
 	private List<Docente> docentesTarget;
 
-
-		
 	private TccDAO tccDao = new TccDAO();
-	private BancaDAO bancaDao = new BancaDAO();
+//	private BancaDAO bancaDao = new BancaDAO();
 	private DefesaDAO defesaDao = new DefesaDAO();
 	private DocenteDAO docenteDao = new DocenteDAO();
 	private HorarioDAO horarioDao = new HorarioDAO();
@@ -61,7 +59,7 @@ public class IncluirEditarDefesaBean extends GenericBean{
 	public void init(){
 		
 		tcc = (Tcc) this.getFlash("tcc");
-		banca = new Banca();
+//		banca = new Banca();
 		defesa = new Defesa();
 		docentesSource = docenteDao.findAll();
         docentesTarget = new ArrayList<>();
@@ -77,8 +75,8 @@ public class IncluirEditarDefesaBean extends GenericBean{
 			String dia = ld.getDayOfWeek().getDisplayName(TextStyle.FULL,new Locale("pt", "BR")).split("-")[0].toUpperCase();
 			
 			
-			LocalTime ltHoraInicio = LocalTime.parse(horaInicio);
-			LocalTime ltHoraFim = LocalTime.parse(horaFim);
+			LocalTime ltHoraInicio = LocalTime.parse(defesa.getHoraInicio());
+			LocalTime ltHoraFim = LocalTime.parse(defesa.getHoraFim());
 			
 			List<HorarioEnum> horariosUtilizadosDefesa = new ArrayList<>();
 			Set<Docente> listaDocentesFiltrada = new HashSet<>();
@@ -118,14 +116,19 @@ public class IncluirEditarDefesaBean extends GenericBean{
 	}
 
 	public String salvarDefesa(){
-//		defesa.setAvaliadores(docentes.getTarget());
+		
+//		for(Docente d : docentes.getTarget()){
+//			defesa.getAvaliadores().add(d);
+//		}
+		defesa.setAvaliadores(docentes.getTarget());
 		defesaDao.beginTransaction();
 		defesaDao.insert(defesa);
 		defesaDao.commit();
-		tcc.getDefesas().add(defesa);
-		tccDao.beginTransaction();
-		tccDao.update(tcc);
-		tccDao.commit();
+		
+//		tcc.getDefesas().add(defesa);
+//		tccDao.beginTransaction();
+//		tccDao.update(tcc);
+//		tccDao.commit();
 		
 		return "manterDefesa?faces-redirect=true";
 	}
@@ -146,14 +149,6 @@ public class IncluirEditarDefesaBean extends GenericBean{
 
 	public void setTcc(Tcc tcc) {
 		this.tcc = tcc;
-	}
-
-	public Banca getBanca() {
-		return banca;
-	}
-
-	public void setBanca(Banca banca) {
-		this.banca = banca;
 	}
 
 	public String getHoraInicio() {
