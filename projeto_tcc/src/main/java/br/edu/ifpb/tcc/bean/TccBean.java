@@ -1,6 +1,9 @@
 package br.edu.ifpb.tcc.bean;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +16,7 @@ import br.edu.ifpb.tcc.dao.DiscenteDAO;
 import br.edu.ifpb.tcc.dao.DocenteDAO;
 import br.edu.ifpb.tcc.dao.TccDAO;
 import br.edu.ifpb.tcc.entity.Discente;
+import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Tcc;
 import br.edu.ifpb.tcc.entity.Tipo;
 import br.edu.ifpb.tcc.entity.Usuario;
@@ -28,6 +32,7 @@ public class TccBean {
 	private Usuario orientador;
 	private String titulo;
 	private Discente discente;
+    private boolean excluir;
 	private TccDAO tccDao = new TccDAO();
 	private DiscenteDAO discenteDao = new DiscenteDAO();
 	private DocenteDAO docenteDao = new DocenteDAO();
@@ -40,10 +45,14 @@ public class TccBean {
 		discente = discenteDao.findDiscente(login.getUsuarioLogado());
 	}
 
-	public String edit() {
+	public String edit(Tcc tcc) {
 		Flash flash= FacesContext.getCurrentInstance().getExternalContext().getFlash();
-		flash.put("nome", titulo);
-		return"edit_tcc?faces-redirect=true";
+		flash.put("titulo", tcc.getTitulo());
+		flash.put("tipo", tcc.getTipo());
+		flash.put("orientador", tcc.getOrientador());
+		flash.put("proposta", tcc.getArquivoTCC());
+		flash.put("tcc", tcc);
+		return"editarTcc?faces-redirect=true";
 	}
 	
 	public String add() {
@@ -59,6 +68,37 @@ public class TccBean {
 		return "index_tcc";
 	}
 	
+	public String update() {
+		Flash flash= FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		Tcc tcc = new Tcc();
+		String titulo = (String) flash.get("titulo");
+		Docente orientador = (Docente) flash.get("orientador");
+		tcc.setDiscente(discente);
+		tcc.setOrientador(orientador);
+		tcc.setTitulo(titulo);
+		tccDao.beginTransaction();
+		tccDao.update(tcc);
+		discenteDao.update(discente);
+		tccDao.commit();
+		return "indexTcc";
+	}
+	
+//	private Map<Integer, Boolean> checked = new HashMap<>(); 
+//
+//	public void delete(){
+//			List<Tcc> tccs = new ArrayList<Tcc>();
+//	        for (Tcc tcc : tccs) {
+//	            Boolean itemChecked = checked.get(tcc.getId());
+//	            if (itemChecked !=null && itemChecked) {
+//	            	tccDao.delete(tcc);
+//	            }
+//	        }
+//	        if (!checked.isEmpty()) {
+//	        	infoMessage = "Tcc(s) removido com sucesso.";
+//	        }
+//	    checked.clear();
+//	}
+
 	public Tipo[] getTipos(){
         return Tipo.values();
     }
@@ -105,6 +145,14 @@ public class TccBean {
 
 	public void setDiscente(Discente discente) {
 		this.discente = discente;
+	}
+
+	public boolean isExcluir() {
+		return excluir;
+	}
+
+	public void setExcluir(boolean excluir) {
+		this.excluir = excluir;
 	}
 	
 }

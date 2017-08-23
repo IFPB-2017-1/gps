@@ -26,25 +26,29 @@
 				</h:form>
 			</p:panel>
 		<p:panel header="TCC's em Aberto" id="listaTCC">
-			<p:commandButton value="Cadastrar TCC" action="incluirEditarTcc?faces-redirect=true"></p:commandButton>
-			<p:button  value="Remover"/>
-			<p:dataTable var="tcc" value="#{manterDefesaBean.tccLista}" emptyMessage="Nenhuma TCC cadastrado">
-				<p:column headerText=" " >
-		        	<p:selectBooleanCheckbox value="#{null}" />
-				</p:column>
-				<p:column headerText="Título" >
-					<h:outputText value="#{tcc.titulo}"/>
-				</p:column>
-				<p:column headerText="Discente">
-					<h:outputText value="#{tcc.discente.usuario.nome}"/>
-				</p:column>
-				<p:column headerText="Orientador">
-					<h:outputText value="#{tcc.orientador.usuario.nome}"/>
-				</p:column>
-				<p:column headerText="Tipo">
-					<h:outputText value="#{tcc.tipo}" />
-				</p:column>
-			</p:dataTable>
+			<p:commandButton value="Cadastrar TCC" action="incluirTcc?faces-redirect=true"></p:commandButton>
+			<p:commandButton value="Remover" actionListener="#{tccBean.delete}"></p:commandButton>
+			<h:form id="formConTCC">
+				<p:dataTable var="tcc" value="#{manterDefesaBean.tccLista}" emptyMessage="Nenhuma TCC cadastrado">
+					<p:column headerText="Título" >
+						<h:commandLink action="#{tccBean.edit(tcc)}" value="#{tcc.titulo}"/>
+					</p:column>
+					<p:column headerText="Discente">
+						<h:outputText value="#{tcc.discente.usuario.nome}"/>
+					</p:column>
+					<p:column headerText="Orientador">
+						<h:outputText value="#{tcc.orientador.usuario.nome}"/>
+					</p:column>
+					<p:column headerText="Tipo">
+						<h:outputText value="#{tcc.tipo}" />
+					</p:column>
+					<!--  <p:column headerText=" " >
+			        	<p:selectManyCheckbox id="excluir" value="#{tccBean.tccs}">
+			        		<f:selectItem />
+			        	</p:selectManyCheckbox>
+					</p:column> -->
+				</p:dataTable>
+			</h:form>
 		</p:panel>
 	</ui:define>
 </ui:composition>
