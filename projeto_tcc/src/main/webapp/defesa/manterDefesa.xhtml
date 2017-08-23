@@ -38,6 +38,9 @@
 			<p:panel header="Lista de defesas" id="listaDefesas">
 				<p:dataTable value="#{manterDefesaBean.defesas}" var="defesa" 
 					emptyMessage="Nenhuma defesa cadastrada ou agendada">
+					<p:column headerText="TCC">
+						<h:outputText value="#{defesa.tcc.titulo}"/>
+					</p:column>
 					<p:column headerText="Local" >
 						<h:outputText value="#{defesa.local}"/>
 					</p:column>

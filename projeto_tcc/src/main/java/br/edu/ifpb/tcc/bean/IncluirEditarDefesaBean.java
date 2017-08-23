@@ -118,6 +118,7 @@ public class IncluirEditarDefesaBean extends GenericBean{
 	public String salvarDefesa(){
 		
 		defesa.setAvaliadores(docentes.getTarget());
+		defesa.setTcc(tcc);
 		defesaDao.beginTransaction();
 		defesaDao.insert(defesa);
 		defesaDao.commit();
