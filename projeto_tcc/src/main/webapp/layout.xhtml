@@ -10,79 +10,11 @@
 	<title><ui:insert name="title">Default title</ui:insert></title>
 
 	<!--  IMPORT DOS ARQUIVOS CSS -->
-	<link type="text/css" rel="stylesheet" href="style/style.css" />
+<!-- 	<link type="text/css" rel="stylesheet" href="style/style.css" /> -->
+	<h:outputStylesheet library="style" name="style.css" target="head" />
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<style>
-		.bordernone .ui-datagrid-content{
-    		border: none !important;
-		}
-		.ui-panelgrid td, .ui-panelgrid tr{
-  			  border-style: none !important
-		}
-		
-		.barra-menu{
-			background: #00cdcf !important;
-		}
-		
-		.item-menu{
-			color: #ffffff !important;
-			margin-right: 20px !important;
-			font-size: 20px;
-		}
-		
-		.ui-menuitem-text{
-			color: #ffffff !important;
-			margin-right: 20px !important;
-			font-size: 20px;
-		}
-		
-		.nome-usuario{
-			color: #ffffff !important;
-		}
-		
-		.nome-usuario a:hover{
-			background-color: transparent !important;
-		}
-		
-		.panel-title-h1{
-			font-size: 30px !important;
-			margin-left: 15px;
-			color: #009a9c !important;
-			text-transform: uppercase;
-		}
-		.ui-widget-header{
-			background-color: transparent !important;
-			border: none;
-		}
-		
-		.ui-panel-title{
-			font-size: 25px !important;
-			color: #009a9c !important;
-		}
-		
-		.ui-button{
-			background: #009a9c !important;
-			text-shadow: none !important;
-			border: none !important;
-			padding: 5px !important;
-			color: #ffffff !important;
-		}
-		
-		.ui-widget-content{
-			border: none !important;
-		}
-		
-		.container-padding{
-			padding-left: 20px;
-		}
-		
-		ul.ui-picklist-list:nth-child(2){
-			border: 2px solid #009a9c !important;
-			margin-left: 45px;
-		}
-		
-	</style>
+	
 	
 </h:head>
 
