@@ -36,19 +36,37 @@
 			</p:panel>
 			
 			<p:panel header="Lista de defesas" id="listaDefesas">
-				<p:dataTable value="#{manterDefesaBean.defesas}" var="defesa" 
+				<p:dataTable value="#{manterDefesaBean.defesas}" var="defesa"
 					emptyMessage="Nenhuma defesa cadastrada ou agendada">
 					<p:column headerText="TCC">
-						<h:outputText value="#{defesa.tcc.titulo}"/>
+						<h:outputText value="#{defesa.tcc.titulo}" />
 					</p:column>
-					<p:column headerText="Local" >
-						<h:outputText value="#{defesa.local}"/>
+					<p:column headerText="Local">
+						<h:outputText value="#{defesa.local}" />
 					</p:column>
-					<p:column headerText="Avaliadores" >
-						<h:outputText value="#{defesa.avaliadores}"/>
+					<p:column headerText="Avaliadores">
+						<h:outputText value="#{defesa.avaliadores}" />
 					</p:column>
 					<p:column headerText="Data da defesa">
-						<h:outputText value="#{defesa.data}"/>
+						<h:outputText value="#{defesa.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText> 
+						<h:outputText value=" das #{defesa.horaInicio} às #{defesa.horaFim}" rendered="#{defesa.horaInicio != null}"/>
+					</p:column>
+					<p:column headerText="Situação">
+						<h:outputText value="#{defesa.situacao.descricao}" />
+					</p:column>
+					<p:column headerText="Ações" style="width:7%">
+						<h:form id="formEditar">
+							<h:commandLink title="Editar"
+								actionListener="#{incluirEditarDefesaBean.carregarDefesa(defesa)}"
+								action="incluirEditarDefesa?faces-redirect=true"
+								styleClass="glyphicon glyphicon-edit" />
+							<p:commandLink title="Excluir"
+								actionListener="#{incluirEditarDefesaBean.excluirDefesa(defesa)}"
+								style="margin-left:10px" styleClass="glyphicon glyphicon-remove"
+								ajax="true" update="@(.ui-panel)" />
+						</h:form>
 					</p:column>
 				</p:dataTable>
 			</p:panel>

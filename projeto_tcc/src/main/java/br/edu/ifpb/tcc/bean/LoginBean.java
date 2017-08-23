@@ -35,8 +35,12 @@ public class LoginBean extends GenericBean {
 			docente = docenteDAO.findDocente(usuarioLogado);
 			if(docente == null){
 				discente = discenteDAO.findDiscente(usuarioLogado);
+				proxView = "/tcc/indexTcc.jsf?faces-redirect=true";
+			}else{
+				
+				proxView = "/defesa/manterDefesa.jsf?faces-redirect=true";
 			}
-			proxView = "/index.jsf?faces-redirect=true";
+			
 		} else {
 			FacesMessage msg = new FacesMessage("Login inválido.");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);

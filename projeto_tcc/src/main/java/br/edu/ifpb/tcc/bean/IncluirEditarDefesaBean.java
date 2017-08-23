@@ -32,6 +32,7 @@ import br.edu.ifpb.tcc.entity.Defesa;
 import br.edu.ifpb.tcc.entity.Docente;
 import br.edu.ifpb.tcc.entity.Horario;
 import br.edu.ifpb.tcc.entity.HorarioEnum;
+import br.edu.ifpb.tcc.entity.SituacaoEnum;
 import br.edu.ifpb.tcc.entity.Tcc;
 
 @ManagedBean
@@ -58,13 +59,19 @@ public class IncluirEditarDefesaBean extends GenericBean{
 	@PostConstruct
 	public void init(){
 		
-		tcc = (Tcc) this.getFlash("tcc");
-//		banca = new Banca();
-		defesa = new Defesa();
+		
 		docentesSource = docenteDao.findAll();
         docentesTarget = new ArrayList<>();
          
         docentes =  new DualListModel<Docente>(docentesSource, docentesTarget);
+     
+        defesa = (Defesa) this.getFlash("defesa");
+        if(defesa == null){
+        	defesa = new Defesa();
+        	defesa.setTcc((Tcc) this.getFlash("tcc"));
+        }else{
+        	docentesTarget.addAll(defesa.getAvaliadores());
+        }
 	}
 	
 	public void pesquisar(){
@@ -114,21 +121,41 @@ public class IncluirEditarDefesaBean extends GenericBean{
 	public void carregaTcc(Tcc tcc){
 		this.setFlash("tcc", tcc);
 	}
+	
+	public void carregarDefesa(Defesa defesa){
+		this.setFlash("defesa", defesa);
+	}
 
 	public String salvarDefesa(){
 		
-		defesa.setAvaliadores(docentes.getTarget());
-		defesa.setTcc(tcc);
-		defesaDao.beginTransaction();
-		defesaDao.insert(defesa);
-		defesaDao.commit();
-		
-		tcc.getDefesas().add(defesa);
-		tccDao.beginTransaction();
-		tccDao.update(tcc);
-		tccDao.commit();
+		if(defesa.getId() == null){
+			defesa.setSituacao(SituacaoEnum.ANALISE);
+			defesa.setAvaliadores(docentes.getTarget());
+//			defesa.setTcc(tcc);
+			defesaDao.beginTransaction();
+			defesaDao.insert(defesa);
+			defesaDao.commit();
+			
+			tcc = tccDao.find(defesa.getTcc().getId());
+			
+			tcc.getDefesas().add(defesa);
+			tccDao.beginTransaction();
+			tccDao.update(tcc);
+			tccDao.commit();
+		}else{
+			defesa.setAvaliadores(docentes.getTarget());
+			defesaDao.beginTransaction();
+			defesaDao.update(defesa);
+			defesaDao.commit();
+		}
 		
 		return "manterDefesa?faces-redirect=true";
+	}
+	
+	public void excluirDefesa(Defesa defesa){
+		defesaDao.beginTransaction();
+		defesaDao.delete(defesa);
+		defesaDao.commit();
 	}
 
 	public Defesa getDefesa() {
