@@ -17,7 +17,7 @@
 				<p:panelGrid columns="3" styleClass="bordernone table-hover">
 					<h:outputLabel value="Agendar defesa para:" />
 					<h:outputText id="tcc"
-						value="#{incluirEditarDefesaBean.tcc.titulo} de #{incluirEditarDefesaBean.tcc.discente.usuario.nome}" />
+						value="#{incluirEditarDefesaBean.defesa.tcc.titulo} de #{incluirEditarDefesaBean.defesa.tcc.discente.usuario.nome}" />
 					<h:message for="tcc" />
 
 					<h:outputLabel value="Local:" />
@@ -42,8 +42,6 @@
 
 					<p:outputLabel value="Banca:" />
 					<h:panelGroup>
-						<h:outputText value="#{incluirEditarDefesaBean.defesa.avaliadores}"
-							rendered="#{incluirEditarDefesaBean.defesa.avaliadores != null}" />
 						<p:commandButton 
 							value="Pesquisar" style="margin: 3px" update="painelCadastro"
 							actionListener="#{incluirEditarDefesaBean.pesquisar}" />

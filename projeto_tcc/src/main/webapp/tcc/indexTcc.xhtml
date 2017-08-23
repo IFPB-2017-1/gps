@@ -28,7 +28,7 @@
 			<p:commandButton value="Cadastrar TCC" action="incluirTcc?faces-redirect=true"></p:commandButton>
 			<p:commandButton value="Remover" actionListener="#{tccBean.delete}"></p:commandButton>
 			<h:form id="formConTCC">
-				<p:dataTable var="tcc" value="#{manterDefesaBean.tccLista}" emptyMessage="Nenhuma TCC cadastrado">
+				<p:dataTable var="tcc" value="#{tccBean.tccs}" emptyMessage="Nenhuma TCC cadastrado">
 					<p:column headerText="Título" >
 						<h:commandLink action="#{tccBean.edit(tcc)}" value="#{tcc.titulo}"/>
 					</p:column>
