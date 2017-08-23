@@ -11,31 +11,33 @@
 	<title>Agendamento de TCC's - Login</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  />
-	<link type="text/css" rel="stylesheet" href="style/login.css" />
+<!-- 	<link type="text/css" rel="stylesheet" href="style/login.css" /> -->
+	<h:outputStylesheet library="style" name="login.css" target="head" />
 </h:head>
 <h:body>
 
 	<div class="container">
+			<div class="col-md-2">
+				<img class="img-logo" src="https://www.ifpb.edu.br/prpipg/pesquisa/imagens-pesquisa/ifpb.png/@@images/0609b1d7-4a7d-41be-bd18-081ecb35eb9e.png" />
+			</div>
 
-		<h:form id="formLogin" styleClass="form-signin">
-			<h2 class="form-signin-heading">
-				Log<i class="glyphicon glyphicon-phone"></i>n
-			</h2>
-
-			<h:messages infoStyle="color:blue" errorStyle="color:red"
-				layout="table" />
-
-			<p:inputText id="usuario" value="#{loginBean.usuario}"
-				styleClass="form-control" placeholder="usuário" />
-
-			<p:password id="senha" value="#{loginBean.senha}"
-				styleClass="form-control" placeholder="Senha" />
-
-
-			<h:commandButton styleClass="btn btn-lg btn-primary btn-block"
-				action="#{loginBean.autenticar}" value="Entrar" />
-		</h:form>
-
+			<h:form id="formLogin" styleClass="form-signin">
+				<h2 class="form-signin-heading">
+				</h2>
+	
+				<h:messages infoStyle="color:blue" errorStyle="color:red"
+					layout="table" />
+	
+				<p:inputText id="usuario" value="#{loginBean.usuario}"
+					styleClass="form-control input-login" placeholder="usuário" />
+	
+				<p:password id="senha" value="#{loginBean.senha}"
+					styleClass="form-control input-login" placeholder="Senha" />
+	
+	
+				<h:commandButton styleClass="btn-login-blue btn btn-lg btn-primary btn-block"
+					action="#{loginBean.autenticar}" value="Entrar" />
+			</h:form>
 	</div>
 
 </h:body>
