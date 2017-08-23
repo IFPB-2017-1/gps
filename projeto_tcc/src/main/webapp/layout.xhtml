@@ -10,17 +10,11 @@
 	<title><ui:insert name="title">Default title</ui:insert></title>
 
 	<!--  IMPORT DOS ARQUIVOS CSS -->
-	<link type="text/css" rel="stylesheet" href="style/style.css" />
+<!-- 	<link type="text/css" rel="stylesheet" href="style/style.css" /> -->
+	<h:outputStylesheet library="style" name="style.css" target="head" />
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<style>
-		.bordernone .ui-datagrid-content{
-    		border: none !important;
-		}
-		.ui-panelgrid td, .ui-panelgrid tr{
-  			  border-style: none !important
-		}
-	</style>
+	
 	
 </h:head>
 
@@ -31,23 +25,20 @@
 		<h:form>
 			<p:growl id="messages" />
 
-			<p:menubar>
-				<p:menuitem value="Inicio" url="/paginas/index.jsf"
-					icon="ui-icon-document" />
-				<p:menuitem value="Calendário" url="/paginas/calendario.jsf"
-					icon="ui-icon-pencil" />
-				<p:submenu label="Cadastros" icon="ui-icon-document">
-					<p:menuitem value="Discente" url="/paginas/cadastroDiscente.jsf" />
-					<p:menuitem value="Docente" url="/paginas/cadastroDocente.jsf" />
+			<p:menubar styleClass="barra-menu">
+				<p:menuitem value="Inicio" url="/paginas/index.jsf" styleClass="item-menu" />
+				<p:menuitem value="Calendário" url="/paginas/calendario.jsf" styleClass="item-menu" />
+				<p:submenu label="Cadastros" styleClass="item-menu">
+					<p:menuitem value="Discente" url="/paginas/cadastroDiscente.jsf"/>
+					<p:menuitem value="Docente" url="/paginas/cadastroDocente.jsf"/>
 					<p:menuitem value="TCC" url="/tcc/indexTcc.jsf" />
 				</p:submenu>
 
-				<p:menuitem value="Defesas" url="/defesa/manterDefesa.jsf"
-					icon="ui-icon-document" />
+				<p:menuitem value="Defesas" url="/defesa/manterDefesa.jsf" styleClass="item-menu" />
 
 				<f:facet name="options">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
+						<li class="dropdown nome-usuario"><a href="#" class="dropdown-toggle nome-usuario"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false"> <h:outputText
 									value="#{loginBean.usuarioLogado.nome} " /> <h:outputText

@@ -7,13 +7,12 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<h:body>  
+ 
 <ui:composition template="/layout.xhtml">
 	<ui:define name="title">Tcc</ui:define>
 
 	<ui:define name="body">
-		<h1> DEFESAS TCC EM 2017.1</h1>
+		<h1 class="panel-title-h1"> DEFESAS TCC EM 2017.1</h1>
 		<p:panel header="Filtrar">
 				<h:form id="formBuscaTcc">
 					<h:panelGrid columns="2" border="0">
@@ -42,15 +41,9 @@
 					<p:column headerText="Tipo">
 						<h:outputText value="#{tcc.tipo}" />
 					</p:column>
-					<!--  <p:column headerText=" " >
-			        	<p:selectManyCheckbox id="excluir" value="#{tccBean.tccs}">
-			        		<f:selectItem />
-			        	</p:selectManyCheckbox>
-					</p:column> -->
 				</p:dataTable>
 			</h:form>
 		</p:panel>
 	</ui:define>
 </ui:composition>
-</h:body>
 </html>

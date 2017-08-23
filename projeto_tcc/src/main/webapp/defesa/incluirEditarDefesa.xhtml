@@ -12,37 +12,66 @@
 
 	<ui:define name="body">
 		<p:panel header="Cadastro de Defesa" id="painelCadastro">
-			<p:panelGrid columns="3" styleClass="bordernone table-hover">
-				<h:outputLabel value="Agendar defesa para:" />
-				<h:outputText id="tcc"
-					value="#{incluirEditarDefesaBean.tcc.titulo} de #{incluirEditarDefesaBean.tcc.discente.usuario.nome}" />
-				<h:message for="tcc" />
+			<h:form>
 
-				<h:outputLabel value="Local:" />
-				<p:inputText id="local" />
-				<h:message for="local" />
+				<p:panelGrid columns="3" styleClass="bordernone table-hover">
+					<h:outputLabel value="Agendar defesa para:" />
+					<h:outputText id="tcc"
+						value="#{incluirEditarDefesaBean.tcc.titulo} de #{incluirEditarDefesaBean.tcc.discente.usuario.nome}" />
+					<h:message for="tcc" />
 
-				<h:outputLabel value="Data:" />
-				<p:calendar id="data" showOn="button" />
-				<h:message for="data" />
-				
-				<h:outputLabel value="Hora inicio:"/>
-				<p:inputMask mask="99:99" id="horaI" />
-				<h:message for="horaI" />
-				
-				<h:outputLabel value="Hora fim:"/>
-				<p:inputMask mask="99:99" id="horaF" />
-				<h:message for="horaF" />
-				
-				<p:outputLabel value="Banca:"/>
-				<p:lightBox iframe="true" id="lighbox3">
-					<h:outputLink value="http://localhost:8080/agendamentotcc/banca/incluirEditarBanca.jsf">
-						<h:outputText value="Cadastrar" />
-					</h:outputLink>
-				</p:lightBox>
+					<h:outputLabel value="Local:" />
+					<p:inputText id="local"
+						value="#{incluirEditarDefesaBean.defesa.local}" />
+					<h:message for="local" />
+
+					<h:outputLabel value="Data:" />
+					<p:calendar id="data" showOn="button"
+						value="#{incluirEditarDefesaBean.defesa.data}" />
+					<h:message for="data" />
+
+					<h:outputLabel value="Hora inicio:" />
+					<p:inputMask mask="99:99" id="horaI"
+						value="#{incluirEditarDefesaBean.defesa.horaInicio}" />
+					<h:message for="horaI" />
+
+					<h:outputLabel value="Hora fim:" />
+					<p:inputMask mask="99:99" id="horaF"
+						value="#{incluirEditarDefesaBean.defesa.horaFim}" />
+					<h:message for="horaF" />
+
+					<p:outputLabel value="Banca:" />
+					<h:panelGroup>
+						<h:outputText value="#{incluirEditarDefesaBean.defesa.avaliadores}"
+							rendered="#{incluirEditarDefesaBean.defesa.avaliadores != null}" />
+						<p:commandButton 
+							value="Pesquisar" style="margin: 3px" update="painelCadastro"
+							actionListener="#{incluirEditarDefesaBean.pesquisar}" />
+					</h:panelGroup>
+
+				</p:panelGrid>
 
 
-			</p:panelGrid>
+				<p:pickList id="DocenteList"
+					value="#{incluirEditarDefesaBean.docentes}" var="docente"
+					effect="bounce" itemValue="#{docente}" converter="PickListConverter"
+					itemLabel="#{docente.usuario.nome}" showSourceControls="false"
+					showCheckbox="true" responsive="true" showSourceFilter="true"
+					filterMatchMode="contains">
+
+					<f:facet name="sourceCaption">Docentes disponíveis</f:facet>
+					<f:facet name="targetCaption">Selecionados</f:facet>
+
+
+				</p:pickList>
+
+				<p:commandButton id="salvarDefesa" value="Salvar Defesa"
+					action="#{incluirEditarDefesaBean.salvarDefesa}"
+					style="margin-top:5px; margin-left:60%" 
+					ajax="false" />
+
+
+			</h:form>
 		</p:panel>
 	</ui:define>
 </ui:composition>
