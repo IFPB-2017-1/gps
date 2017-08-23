@@ -28,13 +28,16 @@
 			<p:menubar styleClass="barra-menu">
 				<p:menuitem value="Inicio" url="/paginas/index.jsf" styleClass="item-menu" />
 				<p:menuitem value="Calendário" url="/paginas/calendario.jsf" styleClass="item-menu" />
-				<p:submenu label="Cadastros" styleClass="item-menu">
-					<p:menuitem value="Discente" url="/discente/listarDiscentes.jsf"/>
+				<p:submenu label="Cadastros" styleClass="item-menu" rendered="#{loginBean.docente.usuario.perfil == 'ADMIN'}">
+					<p:menuitem value="Discente" url="/discente/listarDiscentes.jsf" />
 					<p:menuitem value="Docente" url="/docente/listarDocentes.jsf"/>
-					<p:menuitem value="TCC" url="/tcc/indexTcc.jsf" />
 				</p:submenu>
+				
+				<p:menuitem value="TCC" url="/tcc/indexTcc.jsf" styleClass="item-menu" 
+					rendered="#{loginBean.discente != null}" />
 
-				<p:menuitem value="Defesas" url="/defesa/manterDefesa.jsf" styleClass="item-menu" />
+				<p:menuitem value="Defesas" url="/defesa/manterDefesa.jsf" styleClass="item-menu" 
+					rendered="#{loginBean.docente.usuario.perfil == 'ADMIN'}" />
 
 				<f:facet name="options">
 					<ul class="nav navbar-nav navbar-right">
