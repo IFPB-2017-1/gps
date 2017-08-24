@@ -1,13 +1,11 @@
 package br.edu.ifpb.tcc.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.edu.ifpb.tcc.entity.Docente;
-import br.edu.ifpb.tcc.entity.Horario;
 import br.edu.ifpb.tcc.entity.Usuario;
 
 public class DocenteDAO extends GenericDAO<Docente, Integer> {
@@ -41,6 +39,7 @@ public class DocenteDAO extends GenericDAO<Docente, Integer> {
 		return q.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Docente> pesquisarTSI(){
 		Query q = this.getEntityManager().createQuery("select distinct h.docente from Horario h where h.curso='SISTEMAS PARA INTERNET'" );
 		return q.getResultList();

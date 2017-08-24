@@ -78,8 +78,10 @@ public class EntityManagerConversationFilter implements Filter {
 				ManagedEMContext.unbind(emf);
 				logger.debug(context + "Desassociou EntityManager do contexto");
 				
-				httpSession.removeAttribute(ENTITYMANAGER_FACTORY_KEY);
-				logger.debug(context + "Retirou EntityManager da HttpSession");
+				if (((HttpServletRequest) request).isRequestedSessionIdValid()) {
+					httpSession.removeAttribute(ENTITYMANAGER_FACTORY_KEY);
+					logger.debug(context + "Retirou EntityManager da HttpSession");
+				}
 
 				logger.debug(context + "<<< Fim da conversa��o");
 
@@ -90,8 +92,11 @@ public class EntityManagerConversationFilter implements Filter {
 				ManagedEMContext.unbind(emf);
 				logger.debug(context + "Desassociou EntityManager do contexto");
 				
-				httpSession.setAttribute(ENTITYMANAGER_FACTORY_KEY, currentEntityManager);
-				logger.debug(context + "Associou EntityManager a HttpSession");
+				if (((HttpServletRequest) request).isRequestedSessionIdValid()) {
+					httpSession.setAttribute(ENTITYMANAGER_FACTORY_KEY, currentEntityManager);
+					logger.debug(context + "Associou EntityManager a HttpSession");
+				}
+
 
 				logger.debug(context + "> Retornando para o usuario");
 			}
@@ -133,8 +138,10 @@ public class EntityManagerConversationFilter implements Filter {
 				currentEntityManager.close();
 				logger.debug(context + "Fechou EntityManager ap�s exception");
 
-				httpSession.setAttribute(ENTITYMANAGER_FACTORY_KEY, null);
-				logger.debug(context + "Removeu EntityManager da HttpSession");
+				if (((HttpServletRequest) request).isRequestedSessionIdValid()) {
+					httpSession.setAttribute(ENTITYMANAGER_FACTORY_KEY, null);
+					logger.debug(context + "Removeu EntityManager da HttpSession");
+				}
 
 			}
 
@@ -146,9 +153,7 @@ public class EntityManagerConversationFilter implements Filter {
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		PersistenceUtil.createEntityManagerFactory("agendamentotcc");
 		emf = PersistenceUtil.getEntityManagerFactory();
-		logger.info("Filtro de conversa��es longas inicializado.");
 	}
 
 	public void destroy() {

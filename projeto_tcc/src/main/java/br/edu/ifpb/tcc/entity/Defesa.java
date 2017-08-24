@@ -1,103 +1,134 @@
 package br.edu.ifpb.tcc.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="TB_DEFESA")
+@Table(name = "TB_DEFESA")
 public class Defesa {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="DS_LOCAL")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Tcc tcc;
+
+	@Column(name = "DS_LOCAL")
 	private String local;
-	
-	@Column(name="DS_DATA")
-	private String data;
-	
-	@Column(name="DS_HORA")
-	private String hora;
-	
-	@ManyToOne
-	@JoinColumn(name="ID_LOCAL")
-	private Banca banca;
-	
-	@Column(name="DS_NOTA")
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DT_DATA_HORA")
+	private Date data;
+
+	@Column(name = "HORA_INICIO")
+	private String horaInicio;
+
+	@Column(name = "HORA_FIM")
+	private String horaFim;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "DEFESA_AVALIADORES", joinColumns = {
+			@JoinColumn(name = "DEFESA_ID", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "DOCENTE_ID", referencedColumnName = "NU_ID") })
+	private List<Docente> avaliadores;
+
+	@Column(name = "DS_NOTA")
 	private double nota;
-	
-	@Column(name="BO_ATIVO")
-	private boolean ativo;
-	
-	public Defesa(){}
-	public Defesa(String local, Banca banca){
-		super();
-		this.local = local;
-		this.banca = banca;
-		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-		String dataString = format.format(date);
-		String[] array = new String[2];
-		array = dataString.split(" ");
-		this.data = array[0];
-		this.hora = array[1];
-		this.ativo = true;
+
+	@Column(name = "SITUACAO")
+	@Enumerated(EnumType.STRING)
+	private SituacaoEnum situacao;
+
+	public Defesa() {
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getLocal() {
 		return local;
 	}
+
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	public String getData() {
-		return data;
-	}
-	public void setData(String data) {
-		this.data = data;
-	}
-	public String getHora() {
-		return hora;
-	}
-	public void setHora(String hora) {
-		this.hora = hora;
-	}
-	public Banca getBanca() {
-		return banca;
-	}
-	public void setBanca(Banca banca) {
-		this.banca = banca;
-	}
+
 	public double getNota() {
 		return nota;
 	}
+
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
-	public Boolean getAtivo() {
-		return ativo;
+
+	public Date getData() {
+		return data;
 	}
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+
+	public void setData(Date data) {
+		this.data = data;
 	}
-	@Override
-	public String toString() {
-		return "Defesa [id=" + id + ", local=" + local + ", data=" + data + ", hora=" + hora + ", banca=" + banca
-				+ ", nota=" + nota + ", ativo=" + ativo + "]";
+
+	public String getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getHoraFim() {
+		return horaFim;
+	}
+
+	public void setHoraFim(String horaFim) {
+		this.horaFim = horaFim;
+	}
+
+	public List<Docente> getAvaliadores() {
+		return avaliadores;
+	}
+
+	public void setAvaliadores(List<Docente> avaliadores) {
+		this.avaliadores = avaliadores;
+	}
+
+	public SituacaoEnum getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(SituacaoEnum situacao) {
+		this.situacao = situacao;
+	}
+
+	public Tcc getTcc() {
+		return tcc;
+	}
+
+	public void setTcc(Tcc tcc) {
+		this.tcc = tcc;
 	}
 
 }

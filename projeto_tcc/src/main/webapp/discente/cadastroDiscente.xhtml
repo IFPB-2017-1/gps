@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Cadastro Discente</ui:define>
+	
+	
+	<ui:define name="body">
+	
+	<h:messages />
+	
+	<div id="divFormDiscente">
+	<h:form id="formDiscente">
+	<div id="contentEsquerdo">
+		<h1>Cadastro de Discente</h1>
+	    Nome
+	    <br/><h:inputText id="nome" name="nome" value="#{beanDiscente.nome}"/><br/><br/>
+	    
+	    E-mail
+	    <br/><h:inputText id="email" name="email" value="#{beanDiscente.email}"/><br/><br/>
+	    
+	    Senha
+	    <br/><h:inputSecret id="senha" name="senha" value="#{beanDiscente.senha}"/><br/><br/>
+	    
+	    Confirmar senha
+	    <br/><h:inputSecret id="confirmeSenha" name="confirmeSenha" value="#{beanDiscente.confirmeSenha}"/><br/><br/>
+	    
+	    Endereço
+	    <br/><h:inputText id="endereco" name="endereco" value="#{beanDiscente.endereco}"/><br/><br/><br/>
+	</div>
+	<div id="contentMeio">
+		Matricula
+		<br/><h:inputText id="matricula" name="matricula" value="#{beanDiscente.matricula}"/><br/><br/>
+		
+		Telefone
+		<br/><h:inputText id="telefone" name="telefone" value="#{beanDiscente.telefone}"/><br/><br/>
+		
+		Curso
+		<br/><h:inputText id="curso" name="curso" value="#{beanDiscente.curso}"/><br/><br/>
+		
+		Período
+		<br/><h:inputText id="periodo" name="periodo" value="#{beanDiscente.periodo}"/><br/><br/><br/>
+		
+	</div>
+	<div id="contentDireito">
+		<br/><br/>	
+		<h:commandButton id="btCadastrar" name="btCadastrar" value="Efetuar Cadastro" action="#{beanDiscente.cadastrar}" />
+		<br/><br/>
+		<h:commandButton id="btCancelar" name="btCancelar" value="Cancelar" action="/discente/listarDiscentes?faces-redirect=true"/>
+		<br/><br/><br/>
+	</div>
+	</h:form> <!-- Fim do formulario de discente -->
+	</div><!-- Fim do formulário -->
+	    
+	</ui:define>
+	
+	<ui:define name="footer">
+	 	<ui:include src="/templates/footerBase.xhtml"/>
+	</ui:define>
+	
+</ui:composition>
+</html>
