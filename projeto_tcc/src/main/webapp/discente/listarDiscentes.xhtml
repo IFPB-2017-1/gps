@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Lista de Discentes</ui:define>
+		
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{beanDiscente.listarDiscentes}"/>
+	</f:metadata>
+	
+	<ui:define name="body">
+	<p:panel header="Discentes" id="listaTCC">
+		<p:commandButton value="Novo Cadastro" action="/discente/cadastroDiscente?faces-redirect=true"/><br/><br/>
+		<h:form id="formContentListaarDiscentePrime">
+			<p:dataTable var="discente" value="#{beanDiscente.listaDiscentes}" >
+				<p:column headerText="Nome" >
+					<p:commandLink id="linkNome" name="linkNome" value="#{discente.usuario.nome}"  action="#{beanDiscente.editarDiscente}">
+			    		<f:setPropertyActionListener value="#{discente.id}" target="#{beanDiscente.id}"/>
+			    	</p:commandLink>
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{discente.usuario.email}"/>
+				</p:column>
+				<p:column headerText="Telefone">
+					<h:outputText value="#{discente.usuario.telefone}"/>
+				</p:column>
+				<p:column headerText="Matricula">
+					<h:outputText value="#{discente.usuario.matricula}" />
+				</p:column>
+				<p:column headerText="Curso">
+					<h:outputText value="#{discente.curso}" />
+				</p:column>
+				<p:column headerText="Periodo">
+					<h:outputText value="#{discente.periodo}" />
+				</p:column>
+				<p:column headerText="#">
+					<p:commandLink value="excluir" action="#{beanDiscente.excluir}">
+			    		<f:setPropertyActionListener value="#{discente.id}" target="#{beanDiscente.id}"/>
+			    	</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+	</ui:define>
+	<ui:define name="footer">
+	    <ui:include src="/templates/footerBase.xhtml"/>
+	</ui:define>
+</ui:composition>
+</html>

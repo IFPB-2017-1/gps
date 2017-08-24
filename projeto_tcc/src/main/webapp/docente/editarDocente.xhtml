@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Editar Docente</ui:define>
+	
+	
+	<ui:define name="body">
+	
+	<h:messages />
+	
+	<div id="divFormDocente">
+	<h:form id="formDocente">
+	<div id="contentEsquerdo">
+		<h1>Atualize os dados</h1>
+		
+		<h:inputHidden name="id" value="#{flash.keep.id}"/>
+		
+	    Nome
+	    <br/><h:inputText id="nome" name="nome" value="#{flash.keep.nome}"/><br/><br/>
+	    
+	    E-mail
+	    <br/><h:inputText id="email" name="email" value="#{flash.keep.email}"/><br/><br/>
+	    
+	    Endereço
+	    <br/><h:inputText id="endereco" name="endereco" value="#{flash.keep.endereco}"/><br/><br/><br/>
+	</div>
+	<div id="contentMeio">
+		Matricula
+		<br/><h:inputText id="matricula" name="matricula" value="#{flash.keep.matricula}"/><br/><br/>
+		
+		Telefone
+		<br/><h:inputText id="telefone" name="telefone" value="#{flash.keepe.telefone}"/><br/><br/>
+		
+		Disciplina
+		<br/><h:inputText id="disciplina" name="disciplina" value="#{flash.keepe.disciplina}"/><br/><br/><br/>
+		
+		
+	</div>
+	<div id="contentDireito">
+		<br/><br/>	
+		<h:commandButton id="btAtualizar" name="btAtualizar" value="Atualizar dados" action="#{beanDocente.atualizar}" />
+		<br/><br/>
+		<h:commandButton id="btCancelar" name="btCancelar" value="Cancelar" action="/docente/listarDocentes"/>
+		<br/><br/><br/>
+	</div>
+	</h:form> <!-- Fim do formulario de docente -->
+	</div><!-- Fim do formulário -->
+	    
+	</ui:define>
+	
+	<ui:define name="footer">
+		<ui:include src="/templates/footerBase.xhtml"/>
+	</ui:define>
+	
+	
+</ui:composition>
+</html>

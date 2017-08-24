@@ -1,0 +1,129 @@
+@CHARSET "ISO-8859-1";
+
+.bordernone .ui-datagrid-content {
+	border: none !important;
+}
+
+.ui-panelgrid td, .ui-panelgrid tr {
+	border-style: none !important
+}
+
+.barra-menu {
+	background: #00cdcf !important;
+}
+
+.item-menu {
+	color: #ffffff !important;
+	margin-right: 20px !important;
+	font-size: 20px;
+}
+
+.ui-menuitem-text {
+	color: #ffffff !important;
+	margin-right: 20px !important;
+	font-size: 20px;
+}
+
+.nome-usuario {
+	color: #ffffff !important;
+}
+
+.nome-usuario a:hover {
+	background-color: transparent !important;
+}
+
+.panel-title-h1 {
+	font-size: 30px !important;
+	margin-left: 15px;
+	color: #009a9c !important;
+	text-transform: uppercase;
+}
+
+.ui-widget-header {
+	background-color: transparent !important;
+	border: none;
+}
+
+.ui-panel-title {
+	font-size: 25px !important;
+	color: #009a9c !important;
+}
+
+.ui-button {
+	background: #009a9c !important;
+	text-shadow: none !important;
+	border: none !important;
+	padding: 5px !important;
+	color: #ffffff !important;
+}
+
+.ui-widget-content {
+	border: none !important;
+}
+
+.container-padding {
+	padding-left: 20px;
+}
+
+ul.ui-picklist-list:nth-child(2) {
+	border: 2px solid #009a9c !important;
+	margin-left: 45px;
+}
+
+/* .alert-danger{ */
+/* 	color: red; */
+/* } */
+
+/* .container-login{ */
+/* 	margin: 0 auto; */
+/*     position: relative; */
+/*     text-align: center; */
+/*     top: 230px; */
+/*     width: 45%; */
+/*     height: 380px; */
+/*     border: 15px solid #3fa14c; */
+/* } */
+
+/* .table-login{ */
+/* 	margin: 72px auto; */
+/* 	width: 80%; */
+/* } */
+
+/* .img-logo{ */
+/* 	position: absolute; */
+/*     top: -58%; */
+/*     right: 0; */
+/*     margin: 0 auto; */
+/*     width: 66%; */
+/*     left: 0; */
+/*     background-color: white; */
+/* } */
+
+/* .btn-login{ */
+/* 	width: 100% !important; */
+/*     height: 40px; */
+/*     background: #3fa14c; */
+/*     margin-top: 20px; */
+/*     border: none; */
+/*     font-size: 20px; */
+/*     color: white; */
+/*     font-weight: bold; */
+/* } */
+
+/* .input-login{ */
+/* 	height: 45px; */
+/* 	width: 100%; */
+/* 	margin-bottom: 10px; */
+/* } */
+
+/* .barra-menu{ */
+/* 	background: #00cdcf !important; */
+/* } */
+
+/* .item-menu{ */
+/* 	color: #ffffff !important; */
+/* } */
+
+/* .nome-usuario{ */
+/* 	color: #ffffff !important; */
+/* } */

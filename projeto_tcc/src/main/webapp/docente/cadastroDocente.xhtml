@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">Cadastro Docente</ui:define>
+	
+	
+	
+	<ui:define name="body">
+	
+	<h:messages />
+	
+	<div id="divFormDocente">
+	<h:form id="formDocente">
+	<div id="contentEsquerdo">
+		<h1>Cadastro de Docente</h1>
+	    Nome
+	    <br/><h:inputText id="nome" name="nome" value="#{beanDocente.nome}"/><br/><br/>
+	    
+	    E-mail
+	    <br/><h:inputText id="email" name="email" value="#{beanDocente.email}"/><br/><br/>
+	    
+	    Senha
+	    <br/><h:inputSecret id="senha" name="senha" value="#{beanDocente.senha}"/><br/><br/>
+	    
+	    Confirmar senha
+	    <br/><h:inputSecret id="confirmeSenha" name="confirmeSenha" value="#{beanDocente.confirmeSenha}"/><br/><br/>
+	    
+	    Endereço
+	    <br/><h:inputText id="endereco" name="endereco" value="#{beanDocente.endereco}"/><br/><br/><br/>
+	</div>
+	<div id="contentMeio">
+		Matricula
+		<br/><h:inputText id="matricula" name="matricula" value="#{beanDocente.matricula}"/><br/><br/>
+		
+		Telefone
+		<br/><h:inputText id="telefone" name="telefone" value="#{beanDocente.telefone}"/><br/><br/>
+		
+		
+	</div>
+	<div id="contentDireito">
+		<br/><br/>	
+		<h:commandButton id="btCadastrar" name="btCadastrar" value="Efetuar Cadastro" action="#{beanDocente.cadastrar}" />
+		<br/><br/>
+		<h:commandButton id="btCancelar" name="btCancelar" value="Cancelar" action="/docente/listarDocentes?faces-redirect=true"/>
+		<br/><br/><br/>
+	</div>
+	</h:form> <!-- Fim do formulario de docente -->
+	</div><!-- Fim do formulário -->
+	    
+	</ui:define>
+	
+	<ui:define name="footer">
+		<ui:include src="/templates/footerBase.xhtml"/>
+	</ui:define>
+	
+	
+</ui:composition>
+</html>

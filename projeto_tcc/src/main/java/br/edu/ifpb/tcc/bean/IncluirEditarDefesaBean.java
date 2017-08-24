@@ -36,56 +36,47 @@ import br.edu.ifpb.tcc.entity.Tcc;
 
 @ManagedBean
 @ViewScoped
-public class IncluirEditarBancaBean extends GenericBean{
+public class IncluirEditarDefesaBean extends GenericBean{
 	
-	private Banca banca;
+//	private Banca banca;
 	private Defesa defesa;
 	private Tcc tcc;
-	private Date dataSelecionada;
 	private LocalDate ld;
 	private String horaInicio, horaFim;
 	private DualListModel<Docente> docentes;
-	private DualListModel<Horario> horarios;
-
+	
 	private List<Docente> docentesSource;
 	private List<Docente> docentesTarget;
-	private List<Horario> horariosSource;
-	private List<Horario> horariosTarget;
-	
+
 	private TccDAO tccDao = new TccDAO();
-	private BancaDAO bancaDao = new BancaDAO();
+//	private BancaDAO bancaDao = new BancaDAO();
 	private DefesaDAO defesaDao = new DefesaDAO();
 	private DocenteDAO docenteDao = new DocenteDAO();
 	private HorarioDAO horarioDao = new HorarioDAO();
 	
 	
-	
 	@PostConstruct
 	public void init(){
 		
-		tcc = tccDao.find(1);
-		banca = new Banca();
+		tcc = (Tcc) this.getFlash("tcc");
+//		banca = new Banca();
 		defesa = new Defesa();
-//		docentes = docenteDao.findAll();
 		docentesSource = docenteDao.findAll();
         docentesTarget = new ArrayList<>();
-//        horariosSource = new ArrayList<>();
-        horariosTarget = new ArrayList<>();
          
         docentes =  new DualListModel<Docente>(docentesSource, docentesTarget);
-        horarios =  new DualListModel<Horario>(horariosSource, horariosTarget);
 	}
 	
 	public void pesquisar(){
-		if(dataSelecionada!=null){
+		if(defesa.getData()!=null){
 			Calendar c = Calendar.getInstance();
-			c.setTime(dataSelecionada);
+			c.setTime(defesa.getData());
 			ld = LocalDate.of(c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH));
 			String dia = ld.getDayOfWeek().getDisplayName(TextStyle.FULL,new Locale("pt", "BR")).split("-")[0].toUpperCase();
 			
 			
-			LocalTime ltHoraInicio = LocalTime.parse(horaInicio);
-			LocalTime ltHoraFim = LocalTime.parse(horaFim);
+			LocalTime ltHoraInicio = LocalTime.parse(defesa.getHoraInicio());
+			LocalTime ltHoraFim = LocalTime.parse(defesa.getHoraFim());
 			
 			List<HorarioEnum> horariosUtilizadosDefesa = new ArrayList<>();
 			Set<Docente> listaDocentesFiltrada = new HashSet<>();
@@ -113,38 +104,40 @@ public class IncluirEditarBancaBean extends GenericBean{
 					docentesSource.add(d);
 				}
 			}			
-//			horariosSource
 			
 			docentes =  new DualListModel<Docente>(docentesSource, docentesTarget);
-			horarios = new DualListModel<Horario>(horariosSource,horariosTarget);
 			
 			
 		}
 	}
-
-
-	public Banca getBanca() {
-		return banca;	
+	
+	public void carregaTcc(Tcc tcc){
+		this.setFlash("tcc", tcc);
 	}
 
-
-
-	public void setBanca(Banca banca) {
-		this.banca = banca;
+	public String salvarDefesa(){
+		
+		defesa.setAvaliadores(docentes.getTarget());
+		defesa.setTcc(tcc);
+		defesaDao.beginTransaction();
+		defesaDao.insert(defesa);
+		defesaDao.commit();
+		
+		tcc.getDefesas().add(defesa);
+		tccDao.beginTransaction();
+		tccDao.update(tcc);
+		tccDao.commit();
+		
+		return "manterDefesa?faces-redirect=true";
 	}
-
-
 
 	public Defesa getDefesa() {
 		return defesa;
 	}
 
-
-
 	public void setDefesa(Defesa defesa) {
 		this.defesa = defesa;
 	}
-
 
 
 	public Tcc getTcc() {
@@ -152,95 +145,62 @@ public class IncluirEditarBancaBean extends GenericBean{
 	}
 
 
-
 	public void setTcc(Tcc tcc) {
 		this.tcc = tcc;
 	}
-
-
-
-	public Date getDataSelecionada() {
-		return dataSelecionada;
-	}
-
-
-
-	public void setDataSelecionada(Date dataSelecionada) {
-		this.dataSelecionada = dataSelecionada;
-	}
-
-
 
 	public String getHoraInicio() {
 		return horaInicio;
 	}
 
-
-
 	public void setHoraInicio(String horaInicio) {
 		this.horaInicio = horaInicio;
 	}
-
-
 
 	public String getHoraFim() {
 		return horaFim;
 	}
 
-
-
 	public void setHoraFim(String horaFim) {
 		this.horaFim = horaFim;
 	}
-
-
 
 	public DualListModel<Docente> getDocentes() {
 		return docentes;
 	}
 
-
-
 	public void setDocentes(DualListModel<Docente> docentes) {
 		this.docentes = docentes;
 	}
-	
-	
-	public DualListModel<Horario> getHorarios() {
-		return horarios;
-	}
-
-	public void setHorarios(DualListModel<Horario> horarios) {
-		this.horarios = horarios;
-	}
 
 	public void onTransfer(TransferEvent event) {
-        StringBuilder builder = new StringBuilder();
-        for(Object item : event.getItems()) {
-            builder.append(((Docente) item).getUsuario().getNome()).append("<br />");
-        }
-         
-        FacesMessage msg = new FacesMessage();
-        msg.setSeverity(FacesMessage.SEVERITY_INFO);
-        msg.setSummary("Items Transferred");
-        msg.setDetail(builder.toString());
-         
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+//        StringBuilder builder = new StringBuilder();
+//        for(Object item : event.getItems()) {
+//            builder.append(((Docente) item).getUsuario().getNome()).append("<br />");
+//        }
+//         
+//        FacesMessage msg = new FacesMessage();
+//        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+//        msg.setSummary("Items Transferred");
+//        msg.setDetail(builder.toString());
+//         
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
     } 
  
     public void onSelect(SelectEvent event) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
     }
      
     public void onUnselect(UnselectEvent event) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
     }
      
     public void onReorder() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
     } 
-
+	
+	
 }
